@@ -10,26 +10,31 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-  var window: UIWindow?
+    var window: UIWindow?
 
-  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    guard let windowScene = (scene as? UIWindowScene) else { return }
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = (scene as? UIWindowScene) else { return }
 
-    assembly(windowScene)
+        _ = CoreDataManager.shared
 
-  }
+        assembly(windowScene)
+
+    }
+
+    func sceneWillResignActive(_ scene: UIScene) {
+        CoreDataManager.shared.save()
+    }
 }
 
 private extension SceneDelegate {
-  func assembly(_ windowScene: UIWindowScene ) {
-    window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-    window?.windowScene = windowScene
-    let rootViewController = RootViewController()
-    rootViewController.title = "Names.documents"
-//    let navigationViewController = UINavigationController(rootViewController: rootViewController)
-    window?.rootViewController = rootViewController
-    window?.makeKeyAndVisible()
-  }
+    func assembly(_ windowScene: UIWindowScene ) {
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        let rootViewController = RootViewController()
+        rootViewController.title = "Names.documents"
+        window?.rootViewController = rootViewController
+        window?.makeKeyAndVisible()
+    }
 }
 
 extension SceneDelegate {

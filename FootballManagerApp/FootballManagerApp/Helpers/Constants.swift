@@ -19,3 +19,7 @@ enum Title {
     static let teamManager = "Team Manager"
     static let player = "Player"
 }
+
+enum Model {
+    static let name = "Team"
+}

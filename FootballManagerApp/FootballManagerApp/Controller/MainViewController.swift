@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
     lazy var rootViewController = SceneDelegate.shared.rootViewController
 
