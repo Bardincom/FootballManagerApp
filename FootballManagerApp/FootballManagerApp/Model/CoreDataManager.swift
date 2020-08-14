@@ -37,6 +37,13 @@ final class CoreDataManager {
 
     func save() {
         guard getContext().hasChanges else { return }
+
+        do {
+            try getContext().save()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
     }
 
     func save(context: NSManagedObjectContext) {
