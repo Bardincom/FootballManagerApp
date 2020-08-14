@@ -17,6 +17,8 @@
 		A26CF7E224E5396200E66D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A26CF7E124E5396200E66D15 /* Assets.xcassets */; };
 		A26CF7E524E5396200E66D15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A26CF7E324E5396200E66D15 /* LaunchScreen.storyboard */; };
 		A26CF7ED24E555F300E66D15 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26CF7EC24E555F300E66D15 /* RootViewController.swift */; };
+		A2EF204224E5D7C900181BDE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF204124E5D7C900181BDE /* CoreDataManager.swift */; };
+		A2EF204524E5D8C500181BDE /* Team.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A2EF204324E5D8C500181BDE /* Team.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		A26CF7E424E5396200E66D15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A26CF7E624E5396200E66D15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A26CF7EC24E555F300E66D15 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		A2EF204124E5D7C900181BDE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		A2EF204424E5D8C500181BDE /* Team.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Team.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				A26B68E924E5805000908E30 /* Code */,
+				A2EF203E24E5D74F00181BDE /* Model */,
 				A26B68EA24E5806D00908E30 /* View */,
 				A26B68EB24E5807B00908E30 /* Controller */,
 				A26B68F424E587E700908E30 /* Helpers */,
@@ -111,6 +116,15 @@
 				A26CF7E624E5396200E66D15 /* Info.plist */,
 			);
 			path = FootballManagerApp;
+			sourceTree = "<group>";
+		};
+		A2EF203E24E5D74F00181BDE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A2EF204124E5D7C900181BDE /* CoreDataManager.swift */,
+				A2EF204324E5D8C500181BDE /* Team.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,11 +199,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2EF204524E5D8C500181BDE /* Team.xcdatamodeld in Sources */,
 				A26CF7D924E5395D00E66D15 /* AppDelegate.swift in Sources */,
 				A26CF7ED24E555F300E66D15 /* RootViewController.swift in Sources */,
 				A26CF7DB24E5395D00E66D15 /* SceneDelegate.swift in Sources */,
 				A26B68EE24E5830B00908E30 /* MainViewController.swift in Sources */,
 				A26B68F224E5832900908E30 /* PlayerViewController.swift in Sources */,
+				A2EF204224E5D7C900181BDE /* CoreDataManager.swift in Sources */,
 				A26B68F624E5880000908E30 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,6 +400,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A2EF204324E5D8C500181BDE /* Team.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A2EF204424E5D8C500181BDE /* Team.xcdatamodel */,
+			);
+			currentVersion = A2EF204424E5D8C500181BDE /* Team.xcdatamodel */;
+			path = Team.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A26CF7CD24E5395D00E66D15 /* Project object */;
 }

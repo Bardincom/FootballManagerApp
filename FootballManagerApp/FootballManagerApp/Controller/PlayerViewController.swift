@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayerViewController: UIViewController {
+final class PlayerViewController: UIViewController {
 
     lazy var rootViewController = SceneDelegate.shared.rootViewController
 

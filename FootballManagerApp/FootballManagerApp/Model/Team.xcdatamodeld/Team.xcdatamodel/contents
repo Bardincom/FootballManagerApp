@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Club" representedClassName="Club" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String" defaultValueString=""/>
+        <relationship name="player" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Player" inverseName="club" inverseEntity="Player"/>
+    </entity>
+    <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
+        <attribute name="age" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fullName" attributeType="String" defaultValueString=""/>
+        <attribute name="image" attributeType="Transformable"/>
+        <attribute name="nationality" attributeType="String" defaultValueString=""/>
+        <attribute name="number" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="team" attributeType="String" defaultValueString=""/>
+        <relationship name="club" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="player" inverseEntity="Club"/>
+    </entity>
+    <elements>
+        <element name="Player" positionX="-306.89453125" positionY="-180.2578125" width="128" height="148"/>
+        <element name="Club" positionX="-54" positionY="-9" width="128" height="73"/>
+    </elements>
+</model>
