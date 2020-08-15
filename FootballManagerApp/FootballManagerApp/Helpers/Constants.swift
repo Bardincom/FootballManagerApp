@@ -23,3 +23,8 @@ enum Title {
 enum Model {
     static let name = "Team"
 }
+
+enum Color {
+    static let gold = UIColor(named: "gold")
+    static let lightGray = UIColor(named: "lightGray")
+}

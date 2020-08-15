@@ -28,7 +28,7 @@ private extension PlayerViewController {
     func setupNavigationBar() {
         title = Title.player
         let backButton = UIBarButtonItem(image: Icon.backButton, style: .plain, target: self, action: #selector(goToMainViewController))
-        backButton.tintColor = .red
+        backButton.tintColor = Color.gold
         navigationItem.leftBarButtonItem = .some(backButton)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
