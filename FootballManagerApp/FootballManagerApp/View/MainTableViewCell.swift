@@ -23,7 +23,6 @@ class MainTableViewCell: UITableViewCell {
         nationality.text = player.nationality
         fullName.text = player.fullName
         age.text = "\(player.age)"
-//        foto.image = player.image as UIImage
+        foto.image = player.image as? UIImage
     }
-    
 }
