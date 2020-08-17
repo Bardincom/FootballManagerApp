@@ -8,9 +8,17 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
+    @IBOutlet private var mainTableView: UITableView! {
+        willSet {
+            newValue.register(nibCell: MainTableViewCell.self)
+            newValue.tableFooterView = UIView()
+        }
+    }
+    
     lazy var rootViewController = SceneDelegate.shared.rootViewController
+    var players = [Player]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +36,7 @@ private extension MainViewController {
                                      target: self,
                                      action: #selector(goToPlaerViewController))
 
-        button.tintColor = UIColor.red
+        button.tintColor = Color.gold
 
         navigationItem.rightBarButtonItems = .some([button])
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -39,4 +47,21 @@ private extension MainViewController {
     func goToPlaerViewController() {
         rootViewController.switchToPlayerViewController()
     }
+}
+
+extension MainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        players.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeue(reusable: MainTableViewCell.self, for: indexPath)
+        let player = players[indexPath.section]
+        cell.setupPlayer(player)
+        return cell
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+
 }
