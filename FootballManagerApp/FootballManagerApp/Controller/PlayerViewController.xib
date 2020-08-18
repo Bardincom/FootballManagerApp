@@ -18,6 +18,7 @@
                 <outlet property="pickerView" destination="jKa-Ot-Stw" id="ble-iH-mvj"/>
                 <outlet property="positionButton" destination="jVs-dM-vFM" id="Aas-Yr-5Hi"/>
                 <outlet property="saveButton" destination="kEN-jb-LRX" id="jZy-M0-Y0j"/>
+                <outlet property="scrollView" destination="8lp-6O-ZUC" id="r0u-pa-BLh"/>
                 <outlet property="teamButton" destination="zX9-Eh-c5X" id="u3Q-lf-lnn"/>
                 <outlet property="uploadImageButton" destination="Npj-CE-WW8" id="ngh-eW-cBq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -57,12 +58,12 @@
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="64c-uu-xum">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nationality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J4Q-1R-5RV">
                                             <rect key="frame" x="0.0" y="44" width="343" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l5V-gZ-IFk">
                                             <rect key="frame" x="0.0" y="88" width="343" height="34"/>
