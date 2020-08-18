@@ -32,17 +32,6 @@ final class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         fetchData()
     }
-
-    private func fetchData() {
-        players = coreDataManager.fetchData(for: Player.self)
-
-        if !players.isEmpty {
-            mainTableView.isHidden = false
-        } else {
-            mainTableView.isHidden = true
-        }
-        mainTableView.reloadData()
-    }
 }
 
 private extension MainViewController {
@@ -61,12 +50,24 @@ private extension MainViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
+    func fetchData() {
+        players = coreDataManager.fetchData(for: Player.self)
+
+        if !players.isEmpty {
+            mainTableView.isHidden = false
+        } else {
+            mainTableView.isHidden = true
+        }
+        mainTableView.reloadData()
+    }
+
     @objc
     func goToPlaerViewController() {
         rootViewController.switchToPlayerViewController()
     }
 }
 
+//MARK: TableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         players.count
@@ -92,5 +93,6 @@ extension MainViewController: UITableViewDataSource {
 }
 
 extension MainViewController: UITableViewDelegate {
+    //TODO: didSelectRowAt indexPath
 
 }

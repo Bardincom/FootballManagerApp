@@ -25,7 +25,6 @@ class MainTableViewCell: UITableViewCell {
         fullName.text = player.fullName
         position.text = player.position
         age.text = String(format: "%.f", player.age)
-//        foto.image = player.image?.image
         guard let image = UIImage(data: (player.image?.image)!) else { return }
         foto.image = image
     }

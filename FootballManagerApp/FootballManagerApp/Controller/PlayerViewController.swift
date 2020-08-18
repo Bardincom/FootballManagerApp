@@ -10,6 +10,11 @@ import UIKit
 
 final class PlayerViewController: UIViewController {
 
+    private enum CountItem {
+        static let team = Picker.teams.count
+        static let position = Picker.positions.count
+    }
+
     @IBOutlet private var teamButton: UIButton!
     @IBOutlet private var positionButton: UIButton!
     @IBOutlet private var uploadImageButton: UIButton!
@@ -22,16 +27,10 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var pickerView: UIPickerView!
 
     let coreDataManager = CoreDataManager.shared
-    private let imagePickerController = UIImagePickerController()
     private var isTeamSelect: Bool = true
     private var selectTeam: String?
     private var selectPosition: String?
     private var chosenImage = #imageLiteral(resourceName: "defaultImage")
-
-    private enum CountItem {
-        static let team = Picker.teams.count
-        static let position = Picker.positions.count
-    }
 
     lazy var rootViewController = SceneDelegate.shared.rootViewController
 
@@ -74,11 +73,8 @@ final class PlayerViewController: UIViewController {
         player.club = team
         player.position = selectPosition
 
-        //        player. = foto.image
-
         coreDataManager.save(context: context)
         rootViewController.switchToMainViewController()
-        print("savePlayer")
     }
 }
 
@@ -106,10 +102,10 @@ private extension PlayerViewController {
     }
 }
 
-//MARK: ImagePicker
+//MARK: UIImagePickerControllerDelegate
 extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerController() {
-
+        let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = .savedPhotosAlbum
@@ -122,11 +118,11 @@ extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationCon
         chosenImage = editingImage
         foto.image = chosenImage
 
-
         dismiss(animated: true, completion: nil)
     }
 }
 
+//MARK: UIPickerViewDataSource
 extension PlayerViewController: UIPickerViewDataSource {
     func showPickerView() {
         pickerView.backgroundColor = Color.lightGray
@@ -159,6 +155,7 @@ extension PlayerViewController: UIPickerViewDataSource {
     }
 }
 
+//MARK: UIPickerViewDelegate
 extension PlayerViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
