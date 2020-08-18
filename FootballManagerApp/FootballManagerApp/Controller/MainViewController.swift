@@ -18,12 +18,28 @@ final class MainViewController: UIViewController {
     }
     
     lazy var rootViewController = SceneDelegate.shared.rootViewController
+    let coreDataManager = CoreDataManager.shared
     var players = [Player]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationBar()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+    }
+
+    private func fetchData() {
+        players = coreDataManager.fetchData(for: Player.self)
+        if players.count > 0 {
+            mainTableView.isHidden = false
+        } else {
+            mainTableView.isHidden = true
+        }
+        mainTableView.reloadData()
     }
 }
 
@@ -56,7 +72,7 @@ extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(reusable: MainTableViewCell.self, for: indexPath)
-        let player = players[indexPath.section]
+        let player = players[indexPath.row]
         cell.setupPlayer(player)
         return cell
     }

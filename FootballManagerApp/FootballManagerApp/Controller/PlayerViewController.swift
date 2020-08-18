@@ -21,9 +21,12 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var foto: UIImageView!
     @IBOutlet private var pickerView: UIPickerView!
 
-    let codeDataManager = CoreDataManager.shared
-
+    let coreDataManager = CoreDataManager.shared
+    let imagePickerController = UIImagePickerController()
     private var isTeamSelect: Bool = true
+    private var selectTeam: String?
+    private var selectPosition: String?
+    private var chosenImage = #imageLiteral(resourceName: "defaultImage")
 
     private enum CountItem {
         static let team = Picker.teams.count
@@ -55,6 +58,26 @@ final class PlayerViewController: UIViewController {
     }
 
     @IBAction func savePlayer(_ sender: UIButton) {
+        let context = coreDataManager.getContext()
+        let image = coreDataManager.createObject(from: Image.self)
+        //        image.image = chosenImage
+
+        let team = coreDataManager.createObject(from: Club.self)
+        team.name = selectTeam
+
+        let player = coreDataManager.createObject(from: Player.self)
+        player.fullName = fullName.text
+        player.nationality = nationality.text
+        player.age = (age.text! as NSString).doubleValue
+        player.number = (number.text! as NSString).doubleValue
+        player.image = image
+        player.club = team
+        player.position = selectPosition
+
+        //        player. = foto.image
+
+        coreDataManager.save(context: context)
+        rootViewController.switchToMainViewController()
         print("savePlayer")
     }
 }
@@ -86,7 +109,7 @@ private extension PlayerViewController {
 //MARK: ImagePicker
 extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerController() {
-        let imagePickerController = UIImagePickerController()
+
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = .savedPhotosAlbum
@@ -96,6 +119,7 @@ extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
         if let editingImage = info[.editedImage] as? UIImage {
+            //            chosenImage = editingImage
             foto.image = editingImage
         }
 
@@ -145,7 +169,13 @@ extension PlayerViewController: UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
-        isTeamSelect ? teamButton.setTitle(Picker.teams[row], for: .normal) : positionButton.setTitle(Picker.positions[row], for: .normal)
+        if isTeamSelect {
+            teamButton.setTitle(Picker.teams[row], for: .normal)
+            selectTeam = Picker.teams[row]
+        } else {
+            positionButton.setTitle(Picker.positions[row], for: .normal)
+            selectPosition = Picker.positions[row]
+        }
 
         pickerView.isHidden = true
     }
