@@ -5,8 +5,8 @@
         <relationship name="player" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Player" inverseName="club" inverseEntity="Player"/>
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES" codeGenerationType="class">
-        <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
-        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="image" inverseEntity="Player"/>
+        <attribute name="image" optional="YES" attributeType="Binary" valueTransformerName=""/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Player" inverseName="image" inverseEntity="Player"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
         <attribute name="age" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
@@ -14,8 +14,8 @@
         <attribute name="nationality" attributeType="String" defaultValueString=""/>
         <attribute name="number" attributeType="Double" minValueString="0" maxValueString="99" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="position" optional="YES" attributeType="String"/>
-        <relationship name="club" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="player" inverseEntity="Club"/>
-        <relationship name="image" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="player" inverseEntity="Image"/>
+        <relationship name="club" maxCount="1" deletionRule="Cascade" destinationEntity="Club" inverseName="player" inverseEntity="Club"/>
+        <relationship name="image" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Image" inverseName="player" inverseEntity="Image"/>
     </entity>
     <elements>
         <element name="Club" positionX="-54" positionY="-9" width="128" height="73"/>

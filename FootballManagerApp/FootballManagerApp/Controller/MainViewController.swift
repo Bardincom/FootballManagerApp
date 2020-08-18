@@ -19,6 +19,7 @@ final class MainViewController: UIViewController {
     
     lazy var rootViewController = SceneDelegate.shared.rootViewController
     let coreDataManager = CoreDataManager.shared
+
     var players = [Player]()
 
     override func viewDidLoad() {
@@ -34,7 +35,8 @@ final class MainViewController: UIViewController {
 
     private func fetchData() {
         players = coreDataManager.fetchData(for: Player.self)
-        if players.count > 0 {
+
+        if !players.isEmpty {
             mainTableView.isHidden = false
         } else {
             mainTableView.isHidden = true
@@ -75,6 +77,17 @@ extension MainViewController: UITableViewDataSource {
         let player = players[indexPath.row]
         cell.setupPlayer(player)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        let player = players[indexPath.row]
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
+            self.coreDataManager.delete(object: player)
+            self.fetchData()
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 

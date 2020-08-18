@@ -22,7 +22,7 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var pickerView: UIPickerView!
 
     let coreDataManager = CoreDataManager.shared
-    let imagePickerController = UIImagePickerController()
+    private let imagePickerController = UIImagePickerController()
     private var isTeamSelect: Bool = true
     private var selectTeam: String?
     private var selectPosition: String?
@@ -60,7 +60,7 @@ final class PlayerViewController: UIViewController {
     @IBAction func savePlayer(_ sender: UIButton) {
         let context = coreDataManager.getContext()
         let image = coreDataManager.createObject(from: Image.self)
-        //        image.image = chosenImage
+        image.image = chosenImage.pngData()
 
         let team = coreDataManager.createObject(from: Club.self)
         team.name = selectTeam
@@ -118,10 +118,10 @@ extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationCon
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        if let editingImage = info[.editedImage] as? UIImage {
-            //            chosenImage = editingImage
-            foto.image = editingImage
-        }
+        guard let editingImage = info[.editedImage] as? UIImage else { return }
+        chosenImage = editingImage
+        foto.image = chosenImage
+
 
         dismiss(animated: true, completion: nil)
     }
@@ -134,9 +134,7 @@ extension PlayerViewController: UIPickerViewDataSource {
         pickerView.delegate = self
     }
 
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return isTeamSelect ? CountItem.team : CountItem.position
@@ -179,6 +177,4 @@ extension PlayerViewController: UIPickerViewDelegate {
 
         pickerView.isHidden = true
     }
-
-
 }
