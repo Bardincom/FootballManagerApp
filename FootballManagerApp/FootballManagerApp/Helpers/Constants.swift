@@ -28,3 +28,10 @@ enum Color {
     static let gold = UIColor(named: "gold")
     static let lightGray = UIColor(named: "lightGray")
 }
+
+
+struct Picker {
+    static let positions = ["Forward", "Winger", "Midfiel", "Back", "Keeper"]
+    
+    static let teams = ["Free agent", "Real Madrid CF", "FC Bayern München", "FC Barcelona", "Club Atlético de Madrid", "Juventus", "Manchester City FC", "Paris Saint-Germain", "Sevilla FC", "Manchester United FC", "Liverpool FC", "Arsenal FC", "Borussia Dortmund", "Tottenham Hotspur", "FC Shakhtar Donetsk", "Chelsea FC", "Olympique Lyonnais"]
+}

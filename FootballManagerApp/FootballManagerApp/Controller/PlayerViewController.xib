@@ -10,6 +10,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerViewController" customModule="FootballManagerApp" customModuleProvider="target">
             <connections>
+                <outlet property="age" destination="l5V-gZ-IFk" id="7yK-zA-yvn"/>
+                <outlet property="foto" destination="nmH-Md-ru3" id="6Cc-x9-b3m"/>
+                <outlet property="fullName" destination="64c-uu-xum" id="6yF-r1-q6Z"/>
+                <outlet property="nationality" destination="J4Q-1R-5RV" id="DSi-Sf-v6G"/>
+                <outlet property="number" destination="knz-el-ouM" id="VWK-Uz-4cs"/>
+                <outlet property="pickerView" destination="jKa-Ot-Stw" id="ble-iH-mvj"/>
+                <outlet property="positionButton" destination="jVs-dM-vFM" id="Aas-Yr-5Hi"/>
+                <outlet property="saveButton" destination="kEN-jb-LRX" id="jZy-M0-Y0j"/>
+                <outlet property="teamButton" destination="zX9-Eh-c5X" id="u3Q-lf-lnn"/>
+                <outlet property="uploadImageButton" destination="Npj-CE-WW8" id="ngh-eW-cBq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,24 +41,30 @@
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Npj-CE-WW8">
-                                    <rect key="frame" x="127" y="252" width="121" height="36"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <rect key="frame" x="127" y="252" width="121" height="33"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="33" id="h6Y-SM-z4A"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="Upload image"/>
+                                    <connections>
+                                        <action selector="uploadImage:" destination="-1" eventType="touchUpInside" id="43u-Rd-OQU"/>
+                                    </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZAm-Nb-xWd">
-                                    <rect key="frame" x="16" y="304" width="343" height="122"/>
+                                    <rect key="frame" x="16" y="293" width="343" height="122"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="64c-uu-xum">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J4Q-1R-5RV">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nationality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J4Q-1R-5RV">
                                             <rect key="frame" x="0.0" y="44" width="343" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l5V-gZ-IFk">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l5V-gZ-IFk">
                                             <rect key="frame" x="0.0" y="88" width="343" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -60,13 +76,16 @@
                                 </stackView>
                                 <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GvT-PN-PkT">
                                     <rect key="frame" x="16" y="16" width="343" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="31" id="udD-o9-RMC"/>
+                                    </constraints>
                                     <segments>
                                         <segment title="First"/>
                                         <segment title="Second"/>
                                     </segments>
                                 </segmentedControl>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="5kq-dw-g8G">
-                                    <rect key="frame" x="16" y="450" width="343" height="45"/>
+                                    <rect key="frame" x="16" y="431" width="343" height="45"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="q7A-pt-hbp">
                                             <rect key="frame" x="0.0" y="0.0" width="66" height="45"/>
@@ -99,8 +118,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="yiF-Kd-TOA"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="Press to select"/>
+                                                    <connections>
+                                                        <action selector="pressToSelectTeam:" destination="-1" eventType="touchUpInside" id="S4n-FG-KbF"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVs-dM-vFM">
                                                     <rect key="frame" x="0.0" y="25" width="259" height="20"/>
@@ -109,6 +131,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="Press to select"/>
+                                                    <connections>
+                                                        <action selector="pressToSelectPosition:" destination="-1" eventType="touchUpInside" id="WRt-DX-SaJ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -134,7 +159,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEN-jb-LRX">
-                                    <rect key="frame" x="16" y="532" width="343" height="44"/>
+                                    <rect key="frame" x="16" y="607" width="343" height="44"/>
                                     <color key="backgroundColor" name="gold"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="NsE-dr-39b"/>
@@ -142,30 +167,40 @@
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                     <color key="tintColor" name="lightGray"/>
                                     <state key="normal" title="Save"/>
+                                    <connections>
+                                        <action selector="savePlayer:" destination="-1" eventType="touchUpInside" id="EEQ-hF-lbm"/>
+                                    </connections>
                                 </button>
+                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKa-Ot-Stw">
+                                    <rect key="frame" x="0.0" y="350" width="375" height="216"/>
+                                </pickerView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstItem="kEN-jb-LRX" firstAttribute="top" secondItem="5kq-dw-g8G" secondAttribute="bottom" constant="37" id="0Po-AH-tBq"/>
-                                <constraint firstItem="Npj-CE-WW8" firstAttribute="top" secondItem="nmH-Md-ru3" secondAttribute="bottom" constant="8" id="1Bu-yI-9WR"/>
-                                <constraint firstItem="ZAm-Nb-xWd" firstAttribute="top" secondItem="Npj-CE-WW8" secondAttribute="bottom" constant="16" id="3dh-Vd-eKG"/>
+                                <constraint firstItem="kEN-jb-LRX" firstAttribute="top" secondItem="jKa-Ot-Stw" secondAttribute="bottom" constant="41" id="3p6-15-xQK"/>
                                 <constraint firstItem="nmH-Md-ru3" firstAttribute="top" secondItem="GvT-PN-PkT" secondAttribute="bottom" constant="16" id="44j-Qk-Ecj"/>
                                 <constraint firstItem="ZAm-Nb-xWd" firstAttribute="leading" secondItem="ZPJ-1j-gXa" secondAttribute="leading" constant="16" id="6a5-HM-UsB"/>
+                                <constraint firstItem="ZAm-Nb-xWd" firstAttribute="top" secondItem="Npj-CE-WW8" secondAttribute="bottom" constant="8" id="74y-hl-ZK8"/>
                                 <constraint firstItem="GvT-PN-PkT" firstAttribute="leading" secondItem="ZPJ-1j-gXa" secondAttribute="leading" constant="16" id="9ut-8q-TKO"/>
                                 <constraint firstAttribute="trailing" secondItem="nmH-Md-ru3" secondAttribute="trailing" constant="101" id="AD5-Iv-6M9"/>
                                 <constraint firstItem="Ymv-Ze-tnl" firstAttribute="top" secondItem="nmH-Md-ru3" secondAttribute="bottom" constant="-39" id="CpK-QO-qKP"/>
+                                <constraint firstAttribute="trailing" secondItem="jKa-Ot-Stw" secondAttribute="trailing" id="CxK-1j-YiH"/>
                                 <constraint firstItem="kEN-jb-LRX" firstAttribute="leading" secondItem="ZPJ-1j-gXa" secondAttribute="leading" constant="16" id="K3k-KI-xDS"/>
                                 <constraint firstAttribute="trailing" secondItem="Npj-CE-WW8" secondAttribute="trailing" constant="127" id="Kt4-bh-HGH"/>
                                 <constraint firstItem="nmH-Md-ru3" firstAttribute="leading" secondItem="Ymv-Ze-tnl" secondAttribute="trailing" constant="-47" id="Lvl-uj-3LZ"/>
                                 <constraint firstAttribute="trailing" secondItem="ZAm-Nb-xWd" secondAttribute="trailing" constant="16" id="P6Y-DQ-EcI"/>
-                                <constraint firstItem="5kq-dw-g8G" firstAttribute="top" secondItem="ZAm-Nb-xWd" secondAttribute="bottom" constant="24" id="Sc8-fj-1mE"/>
                                 <constraint firstItem="GvT-PN-PkT" firstAttribute="top" secondItem="ZPJ-1j-gXa" secondAttribute="top" constant="16" id="V5s-fx-xnu"/>
                                 <constraint firstAttribute="trailing" secondItem="GvT-PN-PkT" secondAttribute="trailing" constant="16" id="XUF-42-aqp"/>
                                 <constraint firstItem="nmH-Md-ru3" firstAttribute="leading" secondItem="ZPJ-1j-gXa" secondAttribute="leading" constant="100" id="bPr-np-7MH"/>
+                                <constraint firstItem="jKa-Ot-Stw" firstAttribute="leading" secondItem="ZPJ-1j-gXa" secondAttribute="leading" id="dbb-YZ-s22"/>
                                 <constraint firstAttribute="trailing" secondItem="kEN-jb-LRX" secondAttribute="trailing" constant="16" id="ddl-h9-bKA"/>
                                 <constraint firstItem="Npj-CE-WW8" firstAttribute="leading" secondItem="ZPJ-1j-gXa" secondAttribute="leading" constant="127" id="e9c-gu-OfM"/>
                                 <constraint firstItem="5kq-dw-g8G" firstAttribute="leading" secondItem="ZPJ-1j-gXa" secondAttribute="leading" constant="16" id="gbq-Ly-4Y4"/>
                                 <constraint firstAttribute="trailing" secondItem="5kq-dw-g8G" secondAttribute="trailing" constant="16" id="nBi-H5-5nw"/>
+                                <constraint firstAttribute="bottom" secondItem="kEN-jb-LRX" secondAttribute="bottom" constant="16" id="npg-Lo-qNL"/>
+                                <constraint firstItem="5kq-dw-g8G" firstAttribute="top" secondItem="ZAm-Nb-xWd" secondAttribute="bottom" constant="16" id="sAI-FW-HKJ"/>
+                                <constraint firstItem="Npj-CE-WW8" firstAttribute="top" secondItem="nmH-Md-ru3" secondAttribute="bottom" constant="8" id="sH9-AS-YUT"/>
+                                <constraint firstItem="jKa-Ot-Stw" firstAttribute="top" secondItem="Npj-CE-WW8" secondAttribute="bottom" constant="65" id="vF1-4g-xTc"/>
                             </constraints>
                         </view>
                     </subviews>
