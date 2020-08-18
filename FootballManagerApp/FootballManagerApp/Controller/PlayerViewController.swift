@@ -76,6 +76,14 @@ final class PlayerViewController: UIViewController {
         coreDataManager.save(context: context)
         rootViewController.switchToMainViewController()
     }
+
+
+    @IBAction func hideKeyboard(_ sender: UITapGestureRecognizer) {
+        number.resignFirstResponder()
+        fullName.resignFirstResponder()
+        nationality.resignFirstResponder()
+        age.resignFirstResponder()
+    }
 }
 
 private extension PlayerViewController {
@@ -174,4 +182,12 @@ extension PlayerViewController: UIPickerViewDelegate {
 
         pickerView.isHidden = true
     }
+}
+
+// MARK: UITextFieldDelegate
+extension PlayerViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
 }

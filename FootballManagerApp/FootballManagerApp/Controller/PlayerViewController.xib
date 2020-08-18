@@ -57,17 +57,17 @@
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="64c-uu-xum">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nationality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J4Q-1R-5RV">
                                             <rect key="frame" x="0.0" y="44" width="343" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l5V-gZ-IFk">
                                             <rect key="frame" x="0.0" y="88" width="343" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -145,7 +145,7 @@
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="№" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="knz-el-ouM">
                                             <rect key="frame" x="0.0" y="0.0" width="47" height="39"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -176,6 +176,7 @@
                                 </pickerView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstItem="kEN-jb-LRX" firstAttribute="top" secondItem="jKa-Ot-Stw" secondAttribute="bottom" constant="41" id="3p6-15-xQK"/>
                                 <constraint firstItem="nmH-Md-ru3" firstAttribute="top" secondItem="GvT-PN-PkT" secondAttribute="bottom" constant="16" id="44j-Qk-Ecj"/>
@@ -202,6 +203,9 @@
                                 <constraint firstItem="Npj-CE-WW8" firstAttribute="top" secondItem="nmH-Md-ru3" secondAttribute="bottom" constant="8" id="sH9-AS-YUT"/>
                                 <constraint firstItem="jKa-Ot-Stw" firstAttribute="top" secondItem="Npj-CE-WW8" secondAttribute="bottom" constant="65" id="vF1-4g-xTc"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="EGv-GF-Oxv" appends="YES" id="30b-XE-E3Q"/>
+                            </connections>
                         </view>
                     </subviews>
                     <constraints>
@@ -227,6 +231,11 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="-34.399999999999999" y="71.514242878560722"/>
         </view>
+        <tapGestureRecognizer id="EGv-GF-Oxv">
+            <connections>
+                <action selector="hideKeyboard:" destination="-1" id="fHq-4A-dbj"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="defaultImage" width="600" height="623"/>
