@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A23D4D5D24EC97930010FB88 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */; };
 		A2600C2F24E82A48000B0998 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */; };
 		A2600C3124E82D43000B0998 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2600C3024E82D43000B0998 /* Images.xcassets */; };
 		A26B68EE24E5830B00908E30 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26B68EC24E5830B00908E30 /* MainViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		A2600C3024E82D43000B0998 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A26B68EC24E5830B00908E30 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */,
+				A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2EF204524E5D8C500181BDE /* Team.xcdatamodeld in Sources */,
+				A23D4D5D24EC97930010FB88 /* UIViewController+Extension.swift in Sources */,
 				A2F1881124E7121100082CFD /* MainTableViewCell.swift in Sources */,
 				A26CF7D924E5395D00E66D15 /* AppDelegate.swift in Sources */,
 				A26CF7ED24E555F300E66D15 /* RootViewController.swift in Sources */,

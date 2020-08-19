@@ -25,19 +25,25 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var age: UITextField!
     @IBOutlet private var foto: UIImageView!
     @IBOutlet private var pickerView: UIPickerView!
+    @IBOutlet private var scrollView: UIScrollView!
 
+    lazy var rootViewController = SceneDelegate.shared.rootViewController
     let coreDataManager = CoreDataManager.shared
     private var isTeamSelect: Bool = true
     private var selectTeam: String?
     private var selectPosition: String?
     private var chosenImage = #imageLiteral(resourceName: "defaultImage")
 
-    lazy var rootViewController = SceneDelegate.shared.rootViewController
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupUI()
+        setTextFieldDelegate()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notificationAddObserver(#selector(keyboardWillShow(notification:)))
     }
 
     @IBAction func uploadImage(_ sender: UIButton) {
@@ -76,14 +82,18 @@ final class PlayerViewController: UIViewController {
         coreDataManager.save(context: context)
         rootViewController.switchToMainViewController()
     }
+
+
+    @IBAction func hideKeyboard(_ sender: UITapGestureRecognizer) {
+        number.resignFirstResponder()
+        fullName.resignFirstResponder()
+        nationality.resignFirstResponder()
+        age.resignFirstResponder()
+    }
 }
 
+//MARK: Private Methods
 private extension PlayerViewController {
-    @objc
-    func goToMainViewController() {
-        rootViewController.switchToMainViewController()
-    }
-
     func setupNavigationBar() {
         title = Title.player
         let backButton = UIBarButtonItem(image: Icon.backButton, style: .plain, target: self, action: #selector(goToMainViewController))
@@ -100,10 +110,7 @@ private extension PlayerViewController {
         teamButton.tintColor = Color.gold
         positionButton.tintColor = Color.gold
     }
-}
 
-//MARK: UIImagePickerControllerDelegate
-extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showImagePickerController() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -111,6 +118,28 @@ extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationCon
         imagePickerController.sourceType = .savedPhotosAlbum
         present(imagePickerController, animated: true, completion: nil)
     }
+
+    func setTextFieldDelegate() {
+        number.delegate = self
+        fullName.delegate = self
+        nationality.delegate = self
+        age.delegate = self
+    }
+
+    @objc
+    func goToMainViewController() {
+        rootViewController.switchToMainViewController()
+    }
+
+    @objc
+    func keyboardWillShow(notification: NSNotification) {
+        guard let size = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        shiftView(size)
+    }
+}
+
+//MARK: UIImagePickerControllerDelegate
+extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
@@ -173,5 +202,13 @@ extension PlayerViewController: UIPickerViewDelegate {
         }
 
         pickerView.isHidden = true
+    }
+}
+
+// MARK: UITextFieldDelegate
+extension PlayerViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
