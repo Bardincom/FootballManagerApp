@@ -17,13 +17,13 @@ final class MainViewController: UIViewController {
         }
     }
     
-    let coreDataManager = CoreDataManager.shared
+    lazy var coreDataManager = CoreDataManager.shared
 
     var players = [Player]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupNavigationBar()
     }
 

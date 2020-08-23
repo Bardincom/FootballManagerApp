@@ -27,7 +27,7 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var pickerView: UIPickerView!
     @IBOutlet private var scrollView: UIScrollView!
 
-    let coreDataManager = CoreDataManager.shared
+    lazy var coreDataManager = CoreDataManager.shared
     private var isTeamSelect: Bool = true
     private var selectTeam: String?
     private var selectPosition: String?
@@ -111,11 +111,15 @@ private extension PlayerViewController {
     }
 
     func showImagePickerController() {
+        ActivityIndicator.start()
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = .savedPhotosAlbum
-        present(imagePickerController, animated: true, completion: nil)
+
+        present(imagePickerController, animated: true) {
+            ActivityIndicator.stop()
+        }
     }
 
     func setTextFieldDelegate() {
