@@ -27,7 +27,6 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var pickerView: UIPickerView!
     @IBOutlet private var scrollView: UIScrollView!
 
-    lazy var rootViewController = SceneDelegate.shared.rootViewController
     let coreDataManager = CoreDataManager.shared
     private var isTeamSelect: Bool = true
     private var selectTeam: String?
@@ -80,7 +79,7 @@ final class PlayerViewController: UIViewController {
         player.position = selectPosition
 
         coreDataManager.save(context: context)
-        rootViewController.switchToMainViewController()
+        navigationController?.popViewController(animated: true)
     }
 
 
@@ -128,7 +127,7 @@ private extension PlayerViewController {
 
     @objc
     func goToMainViewController() {
-        rootViewController.switchToMainViewController()
+        navigationController?.popViewController(animated: true)
     }
 
     @objc
