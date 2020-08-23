@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A226A6E224F2C5820004BAF9 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A226A6E124F2C5820004BAF9 /* .gitignore */; };
 		A23D4D5D24EC97930010FB88 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */; };
 		A2600C2F24E82A48000B0998 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */; };
 		A2600C3124E82D43000B0998 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2600C3024E82D43000B0998 /* Images.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A226A6E124F2C5820004BAF9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		A2600C3024E82D43000B0998 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		A26CF7CC24E5395D00E66D15 = {
 			isa = PBXGroup;
 			children = (
+				A226A6E124F2C5820004BAF9 /* .gitignore */,
 				A26CF7D724E5395D00E66D15 /* FootballManagerApp */,
 				A26CF7D624E5395D00E66D15 /* Products */,
 			);
@@ -219,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A226A6E224F2C5820004BAF9 /* .gitignore in Resources */,
 				A26CF7E524E5396200E66D15 /* LaunchScreen.storyboard in Resources */,
 				A26B68F324E5832900908E30 /* PlayerViewController.xib in Resources */,
 				A2600C3124E82D43000B0998 /* Images.xcassets in Resources */,
