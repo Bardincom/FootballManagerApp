@@ -20,10 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         assembly(windowScene)
 
     }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        CoreDataManager.shared.save()
-    }
 }
 
 private extension SceneDelegate {
