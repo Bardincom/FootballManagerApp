@@ -75,15 +75,16 @@
                                         <constraint firstAttribute="height" constant="122" id="ewv-vL-VAC"/>
                                     </constraints>
                                 </stackView>
-                                <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GvT-PN-PkT">
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GvT-PN-PkT">
                                     <rect key="frame" x="16" y="16" width="343" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="31" id="udD-o9-RMC"/>
                                     </constraints>
                                     <segments>
-                                        <segment title="First"/>
-                                        <segment title="Second"/>
+                                        <segment title="In Play"/>
+                                        <segment title="Bench"/>
                                     </segments>
+                                    <color key="selectedSegmentTintColor" name="gold"/>
                                 </segmentedControl>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="5kq-dw-g8G">
                                     <rect key="frame" x="16" y="431" width="343" height="45"/>
