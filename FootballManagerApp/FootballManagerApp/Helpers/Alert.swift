@@ -16,7 +16,7 @@ final class Alert {
                                       message: nil, preferredStyle: .alert)
 
         alert.addAction(.init(title: Button.cancel, style: .cancel, handler: nil))
-        alert.addAction(.init(title: Button.selectTeam, style: .default, handler: { action in
+        alert.addAction(.init(title: Button.selectTeam, style: .default, handler: { _ in
             hendler()
         }))
 

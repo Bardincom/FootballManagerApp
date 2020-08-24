@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-/// Индикатор загрузки
 public class ActivityIndicator {
     static var activityIndicator: UIActivityIndicatorView?
     static var style: UIActivityIndicatorView.Style = .medium

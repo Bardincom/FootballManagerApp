@@ -71,8 +71,6 @@ final class PlayerViewController: UIViewController {
         }
         
         let context = coreDataManager.getContext()
-//        let image = coreDataManager.createObject(from: Image.self)
-//        image.image = chosenImage.pngData()
 
         let team = coreDataManager.createObject(from: Club.self)
         team.name = selectTeam
