@@ -25,17 +25,20 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GfM-gK-MwI">
-                        <rect key="frame" x="16" y="3" width="148.5" height="20.5"/>
+                        <rect key="frame" x="16" y="3" width="149" height="20.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfP-C7-zEb">
-                                <rect key="frame" x="0.0" y="0.0" width="21" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfP-C7-zEb">
+                                <rect key="frame" x="0.0" y="0.0" width="21.5" height="20.5"/>
                                 <color key="backgroundColor" name="gold"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="JfP-C7-zEb" secondAttribute="height" multiplier="21:20" id="CeX-Tk-oCF"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player fullName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgB-eQ-nFf">
-                                <rect key="frame" x="29" y="0.0" width="119.5" height="20.5"/>
+                                <rect key="frame" x="29.5" y="0.0" width="119.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -156,6 +159,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="age" destination="ClX-kD-5gg" id="6lg-Lv-oOa"/>
+                <outlet property="foto" destination="K67-70-pq5" id="qTD-CV-rHa"/>
+                <outlet property="fullName" destination="fgB-eQ-nFf" id="ySe-Ev-fkG"/>
+                <outlet property="nationality" destination="Fgd-Zw-4ci" id="sQp-1R-hvb"/>
+                <outlet property="number" destination="JfP-C7-zEb" id="s6s-L1-jrJ"/>
+                <outlet property="position" destination="6O2-lw-uTT" id="IhR-bI-f5Z"/>
+                <outlet property="team" destination="kOc-1N-bKt" id="PZe-WY-WWS"/>
+            </connections>
             <point key="canvasLocation" x="127.53623188405798" y="65.625"/>
         </tableViewCell>
     </objects>

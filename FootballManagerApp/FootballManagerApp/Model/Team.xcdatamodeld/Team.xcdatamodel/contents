@@ -7,11 +7,11 @@
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
         <attribute name="age" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="fullName" attributeType="String" defaultValueString=""/>
-        <attribute name="image" attributeType="Transformable"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="nationality" attributeType="String" defaultValueString=""/>
         <attribute name="number" attributeType="Integer 16" minValueString="0" maxValueString="99" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="team" attributeType="String" defaultValueString=""/>
-        <relationship name="club" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Club" inverseName="player" inverseEntity="Club"/>
+        <attribute name="position" optional="YES" attributeType="String"/>
+        <relationship name="club" maxCount="1" deletionRule="Cascade" destinationEntity="Club" inverseName="player" inverseEntity="Club"/>
     </entity>
     <elements>
         <element name="Club" positionX="-54" positionY="-9" width="128" height="73"/>

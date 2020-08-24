@@ -17,13 +17,19 @@ final class MainViewController: UIViewController {
         }
     }
     
-    lazy var rootViewController = SceneDelegate.shared.rootViewController
+    lazy var coreDataManager = CoreDataManager.shared
+
     var players = [Player]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupNavigationBar()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
     }
 }
 
@@ -34,7 +40,7 @@ private extension MainViewController {
         let button = UIBarButtonItem(image: Icon.addPerson,
                                      style: .plain,
                                      target: self,
-                                     action: #selector(goToPlaerViewController))
+                                     action: #selector(goToPlayerViewController))
 
         button.tintColor = Color.gold
 
@@ -43,12 +49,25 @@ private extension MainViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
+    func fetchData() {
+        players = coreDataManager.fetchData(for: Player.self)
+
+        if !players.isEmpty {
+            mainTableView.isHidden = false
+        } else {
+            mainTableView.isHidden = true
+        }
+        mainTableView.reloadData()
+    }
+
     @objc
-    func goToPlaerViewController() {
-        rootViewController.switchToPlayerViewController()
+    func goToPlayerViewController() {
+        let playerViewController = PlayerViewController()
+        navigationController?.pushViewController(playerViewController, animated: true)
     }
 }
 
+//MARK: TableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         players.count
@@ -56,12 +75,24 @@ extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(reusable: MainTableViewCell.self, for: indexPath)
-        let player = players[indexPath.section]
+        let player = players[indexPath.row]
         cell.setupPlayer(player)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        let player = players[indexPath.row]
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
+            self.coreDataManager.delete(object: player)
+            self.fetchData()
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
 extension MainViewController: UITableViewDelegate {
+    //TODO: didSelectRowAt indexPath
 
 }

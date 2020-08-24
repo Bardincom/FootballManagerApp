@@ -74,8 +74,7 @@ final class CoreDataManager {
         let request: NSFetchRequest<T>
         var fetchResult = [T]()
 
-        let entityName = String(describing: entity)
-        request = NSFetchRequest(entityName: entityName)
+        request = entity.fetchRequest() as! NSFetchRequest<T>
 
         do {
             fetchResult = try context.fetch(request)

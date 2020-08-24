@@ -15,14 +15,20 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet private var nationality: UILabel!
     @IBOutlet private var fullName: UILabel!
     @IBOutlet private var age: UILabel!
+    @IBOutlet private var position: UILabel!
     @IBOutlet private var foto: UIImageView!
 
     func setupPlayer(_ player: Player) {
         team.text = player.club?.name
-        number.text = "\(player.number)"
+        number.text = String(player.number)
         nationality.text = player.nationality
         fullName.text = player.fullName
-        age.text = "\(player.age)"
-        foto.image = player.image as? UIImage
+        position.text = player.position
+        age.text = String(player.age)
+        guard
+            let playerImage = player.image,
+            let image = UIImage(data: playerImage)
+            else { return }
+        foto.image = image
     }
 }
