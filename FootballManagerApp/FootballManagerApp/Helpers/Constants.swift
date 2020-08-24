@@ -29,6 +29,10 @@ enum Color {
     static let lightGray = UIColor(named: "lightGray")
 }
 
+enum Button {
+    static let cancel = "Cancel"
+    static let selectTeam = "Select Team"
+}
 
 struct Picker {
     static let positions = ["Forward", "Winger", "Midfiel", "Back", "Keeper"]

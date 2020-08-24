@@ -38,6 +38,7 @@ final class PlayerViewController: UIViewController {
         setupNavigationBar()
         setupUI()
         setTextFieldDelegate()
+        disableSearchButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +63,13 @@ final class PlayerViewController: UIViewController {
     }
 
     @IBAction func savePlayer(_ sender: UIButton) {
+        guard selectTeam != nil else {
+            Alert.showAlert(self) {
+                self.pressToSelectTeam(self.teamButton)
+            }
+            return
+        }
+        
         let context = coreDataManager.getContext()
         let image = coreDataManager.createObject(from: Image.self)
         image.image = chosenImage.pngData()
@@ -127,6 +135,16 @@ private extension PlayerViewController {
         fullName.delegate = self
         nationality.delegate = self
         age.delegate = self
+    }
+
+    func disableSearchButton() {
+        saveButton.isEnabled = false
+        saveButton.alpha = 0.5
+    }
+
+    func enableSearchButton() {
+        saveButton.isEnabled = true
+        saveButton.alpha = 1
     }
 
     @objc
@@ -213,5 +231,19 @@ extension PlayerViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        guard
+            let number = number.text, !number.isEmpty,
+            let age = age.text, !age.isEmpty,
+            let fullName = fullName.text, !fullName.isEmpty,
+            let nationality = nationality.text, !nationality.isEmpty
+            else {
+                disableSearchButton()
+                return }
+
+        enableSearchButton()
     }
 }

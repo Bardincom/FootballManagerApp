@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A226A6E224F2C5820004BAF9 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A226A6E124F2C5820004BAF9 /* .gitignore */; };
 		A226A6E424F2CBB00004BAF9 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226A6E324F2CBB00004BAF9 /* ActivityIndicator.swift */; };
+		A226A6E624F305CB0004BAF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226A6E524F305CB0004BAF9 /* Alert.swift */; };
 		A23D4D5D24EC97930010FB88 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */; };
 		A2600C2F24E82A48000B0998 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */; };
 		A2600C3124E82D43000B0998 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2600C3024E82D43000B0998 /* Images.xcassets */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		A226A6E124F2C5820004BAF9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A226A6E324F2CBB00004BAF9 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		A226A6E524F305CB0004BAF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		A2600C3024E82D43000B0998 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				A2600C2D24E82A05000B0998 /* Extension */,
 				A26B68F524E5880000908E30 /* Constants.swift */,
 				A226A6E324F2CBB00004BAF9 /* ActivityIndicator.swift */,
+				A226A6E524F305CB0004BAF9 /* Alert.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				A26CF7D924E5395D00E66D15 /* AppDelegate.swift in Sources */,
 				A26CF7DB24E5395D00E66D15 /* SceneDelegate.swift in Sources */,
 				A226A6E424F2CBB00004BAF9 /* ActivityIndicator.swift in Sources */,
+				A226A6E624F305CB0004BAF9 /* Alert.swift in Sources */,
 				A26B68EE24E5830B00908E30 /* MainViewController.swift in Sources */,
 				A26B68F224E5832900908E30 /* PlayerViewController.swift in Sources */,
 				A2600C2F24E82A48000B0998 /* UITableView+Extension.swift in Sources */,
