@@ -20,30 +20,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         assembly(windowScene)
 
     }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        CoreDataManager.shared.save()
-    }
 }
 
 private extension SceneDelegate {
     func assembly(_ windowScene: UIWindowScene ) {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let rootViewController = RootViewController()
+        let rootViewController = MainViewController()
         rootViewController.title = "Names.documents"
-        window?.rootViewController = rootViewController
+        
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 }
-
-extension SceneDelegate {
-    static var shared: SceneDelegate {
-        return UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
-    }
-
-    var rootViewController: RootViewController {
-        return window!.rootViewController as! RootViewController
-    }
-}
-

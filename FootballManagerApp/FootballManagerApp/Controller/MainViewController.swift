@@ -17,14 +17,13 @@ final class MainViewController: UIViewController {
         }
     }
     
-    lazy var rootViewController = SceneDelegate.shared.rootViewController
-    let coreDataManager = CoreDataManager.shared
+    lazy var coreDataManager = CoreDataManager.shared
 
     var players = [Player]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupNavigationBar()
     }
 
@@ -41,7 +40,7 @@ private extension MainViewController {
         let button = UIBarButtonItem(image: Icon.addPerson,
                                      style: .plain,
                                      target: self,
-                                     action: #selector(goToPlaerViewController))
+                                     action: #selector(goToPlayerViewController))
 
         button.tintColor = Color.gold
 
@@ -62,8 +61,9 @@ private extension MainViewController {
     }
 
     @objc
-    func goToPlaerViewController() {
-        rootViewController.switchToPlayerViewController()
+    func goToPlayerViewController() {
+        let playerViewController = PlayerViewController()
+        navigationController?.pushViewController(playerViewController, animated: true)
     }
 }
 

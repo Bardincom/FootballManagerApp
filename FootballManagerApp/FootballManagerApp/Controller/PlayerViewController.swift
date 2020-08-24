@@ -27,8 +27,7 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var pickerView: UIPickerView!
     @IBOutlet private var scrollView: UIScrollView!
 
-    lazy var rootViewController = SceneDelegate.shared.rootViewController
-    let coreDataManager = CoreDataManager.shared
+    lazy var coreDataManager = CoreDataManager.shared
     private var isTeamSelect: Bool = true
     private var selectTeam: String?
     private var selectPosition: String?
@@ -39,6 +38,7 @@ final class PlayerViewController: UIViewController {
         setupNavigationBar()
         setupUI()
         setTextFieldDelegate()
+        disableSearchButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,9 +63,14 @@ final class PlayerViewController: UIViewController {
     }
 
     @IBAction func savePlayer(_ sender: UIButton) {
+        guard selectTeam != nil else {
+            Alert.showAlert(self) {
+                self.pressToSelectTeam(self.teamButton)
+            }
+            return
+        }
+        
         let context = coreDataManager.getContext()
-        let image = coreDataManager.createObject(from: Image.self)
-        image.image = chosenImage.pngData()
 
         let team = coreDataManager.createObject(from: Club.self)
         team.name = selectTeam
@@ -73,14 +78,14 @@ final class PlayerViewController: UIViewController {
         let player = coreDataManager.createObject(from: Player.self)
         player.fullName = fullName.text
         player.nationality = nationality.text
-        player.age = (age.text! as NSString).doubleValue
-        player.number = (number.text! as NSString).doubleValue
-        player.image = image
+        player.age = Int16(age.text ?? "0") ?? 0
+        player.number = Int16(number.text ?? "0") ?? 0
+        player.image = foto.image?.pngData()
         player.club = team
         player.position = selectPosition
 
         coreDataManager.save(context: context)
-        rootViewController.switchToMainViewController()
+        navigationController?.popViewController(animated: true)
     }
 
 
@@ -112,11 +117,15 @@ private extension PlayerViewController {
     }
 
     func showImagePickerController() {
+        ActivityIndicator.start()
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = .savedPhotosAlbum
-        present(imagePickerController, animated: true, completion: nil)
+
+        present(imagePickerController, animated: true) {
+            ActivityIndicator.stop()
+        }
     }
 
     func setTextFieldDelegate() {
@@ -126,9 +135,19 @@ private extension PlayerViewController {
         age.delegate = self
     }
 
+    func disableSearchButton() {
+        saveButton.isEnabled = false
+        saveButton.alpha = 0.5
+    }
+
+    func enableSearchButton() {
+        saveButton.isEnabled = true
+        saveButton.alpha = 1
+    }
+
     @objc
     func goToMainViewController() {
-        rootViewController.switchToMainViewController()
+        navigationController?.popViewController(animated: true)
     }
 
     @objc
@@ -210,5 +229,19 @@ extension PlayerViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        guard
+            let number = number.text, !number.isEmpty,
+            let age = age.text, !age.isEmpty,
+            let fullName = fullName.text, !fullName.isEmpty,
+            let nationality = nationality.text, !nationality.isEmpty
+            else {
+                disableSearchButton()
+                return }
+
+        enableSearchButton()
     }
 }
