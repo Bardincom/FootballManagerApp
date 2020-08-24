@@ -71,8 +71,8 @@ final class PlayerViewController: UIViewController {
         }
         
         let context = coreDataManager.getContext()
-        let image = coreDataManager.createObject(from: Image.self)
-        image.image = chosenImage.pngData()
+//        let image = coreDataManager.createObject(from: Image.self)
+//        image.image = chosenImage.pngData()
 
         let team = coreDataManager.createObject(from: Club.self)
         team.name = selectTeam
@@ -80,9 +80,9 @@ final class PlayerViewController: UIViewController {
         let player = coreDataManager.createObject(from: Player.self)
         player.fullName = fullName.text
         player.nationality = nationality.text
-        player.age = (age.text! as NSString).doubleValue
-        player.number = (number.text! as NSString).doubleValue
-        player.image = image
+        player.age = Int16(age.text ?? "0") ?? 0
+        player.number = Int16(number.text ?? "0") ?? 0
+        player.image = foto.image?.pngData()
         player.club = team
         player.position = selectPosition
 
