@@ -13,6 +13,7 @@ let withConfiguration = UIImage.SymbolConfiguration(weight: .medium)
 enum Icon {
     static let addPerson = UIImage(systemName: "person.badge.plus", withConfiguration: withConfiguration)
     static let backButton = UIImage(systemName: "chevron.left", withConfiguration: withConfiguration)
+    static let magnifyingglass = UIImage(systemName: "magnifyingglass", withConfiguration: withConfiguration)
 }
 
 enum Title {
@@ -24,6 +25,11 @@ enum Model {
     static let name = "Team"
 }
 
+enum PickerLabel {
+    static let team = "Team:"
+    static let position = "Position:"
+}
+
 enum Color {
     static let gold = UIColor(named: "gold")
     static let lightGray = UIColor(named: "lightGray")
@@ -32,6 +38,7 @@ enum Color {
 enum Button {
     static let cancel = "Cancel"
     static let selectTeam = "Select Team"
+    static let pressToSelect = "Press to select"
 }
 
 struct Picker {

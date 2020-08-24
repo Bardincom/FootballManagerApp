@@ -37,14 +37,21 @@ private extension MainViewController {
     func setupNavigationBar() {
         title = Title.teamManager
 
-        let button = UIBarButtonItem(image: Icon.addPerson,
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(goToPlayerViewController))
+        let addPlayer = UIBarButtonItem(image: Icon.addPerson,
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(goToPlayerViewController))
 
-        button.tintColor = Color.gold
+        let searchPlayers = UIBarButtonItem(image: Icon.magnifyingglass,
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(goToSearchViewController))
 
-        navigationItem.rightBarButtonItems = .some([button])
+        addPlayer.tintColor = Color.gold
+        searchPlayers.tintColor = Color.gold
+
+        navigationItem.leftBarButtonItem = .some(searchPlayers)
+        navigationItem.rightBarButtonItems = .some([addPlayer])
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -58,6 +65,15 @@ private extension MainViewController {
             mainTableView.isHidden = true
         }
         mainTableView.reloadData()
+    }
+
+    @objc
+    func goToSearchViewController() {
+        let searchViewController = SearchViewController()
+        searchViewController.modalTransitionStyle = .crossDissolve
+        searchViewController.modalPresentationStyle = .overCurrentContext
+        present(searchViewController, animated: true, completion: nil)
+//        navigationController?.pushViewController(searcViewController, animated: true)
     }
 
     @objc

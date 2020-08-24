@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="FootballManagerApp" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWh-GB-avB">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vY5-GR-5AN" customClass="RoudedCornerView" customModule="FootballManagerApp" customModuleProvider="target">
+                    <rect key="frame" x="57.5" y="189.5" width="260" height="288"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hZ1-bO-rPi">
+                            <rect key="frame" x="16" y="16" width="228" height="34"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                        </textField>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2r5-Z8-Fzb">
+                            <rect key="frame" x="16" y="66" width="228" height="34"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVv-Lo-yhy">
+                                    <rect key="frame" x="0.0" y="0.0" width="110" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                </textField>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bzi-ej-5my">
+                                    <rect key="frame" x="118" y="0.0" width="110" height="35"/>
+                                    <segments>
+                                        <segment title="&gt;="/>
+                                        <segment title="="/>
+                                        <segment title="&lt;="/>
+                                    </segments>
+                                    <color key="selectedSegmentTintColor" name="gold"/>
+                                </segmentedControl>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4if-ed-aVP">
+                            <rect key="frame" x="16" y="132" width="228" height="60"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uhk-dl-jpH" customClass="ButtonBlockView" customModule="FootballManagerApp" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="228" height="60"/>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="OUa-IP-Qho"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="cYf-DZ-s8Q">
+                            <rect key="frame" x="16" y="237" width="228" height="30"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZg-iQ-zVI">
+                                    <rect key="frame" x="0.0" y="0.0" width="111" height="30"/>
+                                    <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" title="Reset">
+                                        <color key="titleColor" name="lightGray"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="17Z-Nc-B1z">
+                                    <rect key="frame" x="117" y="0.0" width="111" height="30"/>
+                                    <color key="backgroundColor" name="gold"/>
+                                    <state key="normal" title="Search">
+                                        <color key="titleColor" name="lightGray"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="TrD-aV-zB1"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="hZ1-bO-rPi" firstAttribute="top" secondItem="vY5-GR-5AN" secondAttribute="top" constant="16" id="6wA-U3-CTZ"/>
+                        <constraint firstAttribute="height" constant="288" id="7VQ-HJ-J6P"/>
+                        <constraint firstItem="2r5-Z8-Fzb" firstAttribute="leading" secondItem="vY5-GR-5AN" secondAttribute="leading" constant="16" id="8Cq-GK-E4B"/>
+                        <constraint firstItem="4if-ed-aVP" firstAttribute="leading" secondItem="vY5-GR-5AN" secondAttribute="leading" constant="16" id="Cm9-JK-bkC"/>
+                        <constraint firstItem="4if-ed-aVP" firstAttribute="top" secondItem="2r5-Z8-Fzb" secondAttribute="bottom" constant="32" id="Eo3-5z-AJK"/>
+                        <constraint firstItem="cYf-DZ-s8Q" firstAttribute="leading" secondItem="vY5-GR-5AN" secondAttribute="leading" constant="16" id="FnD-rP-1DX"/>
+                        <constraint firstAttribute="trailing" secondItem="4if-ed-aVP" secondAttribute="trailing" constant="16" id="GMl-w7-mSq"/>
+                        <constraint firstAttribute="trailing" secondItem="hZ1-bO-rPi" secondAttribute="trailing" constant="16" id="Maa-zo-AZl"/>
+                        <constraint firstItem="2r5-Z8-Fzb" firstAttribute="top" secondItem="hZ1-bO-rPi" secondAttribute="bottom" constant="16" id="Q25-05-3iZ"/>
+                        <constraint firstAttribute="trailing" secondItem="cYf-DZ-s8Q" secondAttribute="trailing" constant="16" id="agJ-n8-Ieo"/>
+                        <constraint firstAttribute="width" constant="260" id="kQ8-Kx-LDr"/>
+                        <constraint firstItem="hZ1-bO-rPi" firstAttribute="leading" secondItem="vY5-GR-5AN" secondAttribute="leading" constant="16" id="lJc-I4-aNa"/>
+                        <constraint firstAttribute="trailing" secondItem="2r5-Z8-Fzb" secondAttribute="trailing" constant="16" id="pJz-wx-UhK"/>
+                        <constraint firstItem="cYf-DZ-s8Q" firstAttribute="top" secondItem="4if-ed-aVP" secondAttribute="bottom" constant="45" id="wgl-4I-sPj"/>
+                        <constraint firstItem="4if-ed-aVP" firstAttribute="top" secondItem="2r5-Z8-Fzb" secondAttribute="bottom" constant="32" id="zSi-Fp-mYz"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="bWh-GB-avB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6iy-7L-Xyx"/>
+                <constraint firstItem="vY5-GR-5AN" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="9Zo-De-Nuz"/>
+                <constraint firstItem="vY5-GR-5AN" firstAttribute="centerX" secondItem="bWh-GB-avB" secondAttribute="centerX" id="ZIf-hm-bJp"/>
+                <constraint firstItem="vY5-GR-5AN" firstAttribute="centerY" secondItem="bWh-GB-avB" secondAttribute="centerY" id="et1-sw-61d"/>
+                <constraint firstItem="bWh-GB-avB" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="i1l-Um-eSv"/>
+                <constraint firstItem="vY5-GR-5AN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kAu-Gl-GXt"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="88.605697151424295"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="gold">
+            <color red="0.98431372549019602" green="0.69803921568627447" blue="0.027450980392156862" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="lightGray">
+            <color red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
