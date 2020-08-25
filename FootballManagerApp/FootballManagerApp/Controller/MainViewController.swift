@@ -73,7 +73,6 @@ private extension MainViewController {
         searchViewController.modalTransitionStyle = .crossDissolve
         searchViewController.modalPresentationStyle = .overCurrentContext
         present(searchViewController, animated: true, completion: nil)
-//        navigationController?.pushViewController(searcViewController, animated: true)
     }
 
     @objc

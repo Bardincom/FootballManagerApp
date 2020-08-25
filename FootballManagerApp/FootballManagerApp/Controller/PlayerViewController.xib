@@ -120,7 +120,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="yiF-Kd-TOA"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
                                                     <state key="normal" title="Press to select"/>
                                                     <connections>
                                                         <action selector="pressToSelectTeam:" destination="-1" eventType="touchUpInside" id="S4n-FG-KbF"/>

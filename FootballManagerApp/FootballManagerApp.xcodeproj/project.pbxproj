@@ -12,10 +12,8 @@
 		A226A6E624F305CB0004BAF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226A6E524F305CB0004BAF9 /* Alert.swift */; };
 		A226A6E924F3FB140004BAF9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226A6E724F3FB140004BAF9 /* SearchViewController.swift */; };
 		A226A6EA24F3FB140004BAF9 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A226A6E824F3FB140004BAF9 /* SearchViewController.xib */; };
-		A226A6EC24F405050004BAF9 /* ButtonBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226A6EB24F405050004BAF9 /* ButtonBlockView.swift */; };
-		A226A6F024F411BE0004BAF9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226A6EF24F411BE0004BAF9 /* UIView+Extension.swift */; };
 		A226A6F224F44BA60004BAF9 /* RoudedCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226A6F124F44BA60004BAF9 /* RoudedCornerView.swift */; };
-		A226A6F424F4667F0004BAF9 /* PickerViewBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226A6F324F4667F0004BAF9 /* PickerViewBlock.swift */; };
+		A226A6F624F576AD0004BAF9 /* UIPickerView+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226A6F524F576AD0004BAF9 /* UIPickerView+Extansion.swift */; };
 		A23D4D5D24EC97930010FB88 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */; };
 		A2600C2F24E82A48000B0998 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */; };
 		A2600C3124E82D43000B0998 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2600C3024E82D43000B0998 /* Images.xcassets */; };
@@ -41,10 +39,8 @@
 		A226A6E524F305CB0004BAF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		A226A6E724F3FB140004BAF9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A226A6E824F3FB140004BAF9 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
-		A226A6EB24F405050004BAF9 /* ButtonBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBlockView.swift; sourceTree = "<group>"; };
-		A226A6EF24F411BE0004BAF9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		A226A6F124F44BA60004BAF9 /* RoudedCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoudedCornerView.swift; sourceTree = "<group>"; };
-		A226A6F324F4667F0004BAF9 /* PickerViewBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewBlock.swift; sourceTree = "<group>"; };
+		A226A6F524F576AD0004BAF9 /* UIPickerView+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPickerView+Extansion.swift"; sourceTree = "<group>"; };
 		A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		A2600C3024E82D43000B0998 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -82,7 +78,7 @@
 			children = (
 				A2600C2E24E82A48000B0998 /* UITableView+Extension.swift */,
 				A23D4D5C24EC97930010FB88 /* UIViewController+Extension.swift */,
-				A226A6EF24F411BE0004BAF9 /* UIView+Extension.swift */,
+				A226A6F524F576AD0004BAF9 /* UIPickerView+Extansion.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -101,9 +97,7 @@
 			children = (
 				A2F1880F24E7121100082CFD /* MainTableViewCell.swift */,
 				A2F1881024E7121100082CFD /* MainTableViewCell.xib */,
-				A226A6EB24F405050004BAF9 /* ButtonBlockView.swift */,
 				A226A6F124F44BA60004BAF9 /* RoudedCornerView.swift */,
-				A226A6F324F4667F0004BAF9 /* PickerViewBlock.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -265,19 +259,17 @@
 				A2EF204524E5D8C500181BDE /* Team.xcdatamodeld in Sources */,
 				A23D4D5D24EC97930010FB88 /* UIViewController+Extension.swift in Sources */,
 				A2F1881124E7121100082CFD /* MainTableViewCell.swift in Sources */,
-				A226A6F024F411BE0004BAF9 /* UIView+Extension.swift in Sources */,
 				A26CF7D924E5395D00E66D15 /* AppDelegate.swift in Sources */,
 				A26CF7DB24E5395D00E66D15 /* SceneDelegate.swift in Sources */,
 				A226A6E424F2CBB00004BAF9 /* ActivityIndicator.swift in Sources */,
 				A226A6E624F305CB0004BAF9 /* Alert.swift in Sources */,
 				A226A6F224F44BA60004BAF9 /* RoudedCornerView.swift in Sources */,
 				A26B68EE24E5830B00908E30 /* MainViewController.swift in Sources */,
-				A226A6F424F4667F0004BAF9 /* PickerViewBlock.swift in Sources */,
 				A226A6E924F3FB140004BAF9 /* SearchViewController.swift in Sources */,
+				A226A6F624F576AD0004BAF9 /* UIPickerView+Extansion.swift in Sources */,
 				A26B68F224E5832900908E30 /* PlayerViewController.swift in Sources */,
 				A2600C2F24E82A48000B0998 /* UITableView+Extension.swift in Sources */,
 				A2EF204224E5D7C900181BDE /* CoreDataManager.swift in Sources */,
-				A226A6EC24F405050004BAF9 /* ButtonBlockView.swift in Sources */,
 				A26B68F624E5880000908E30 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

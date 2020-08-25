@@ -10,11 +10,6 @@ import UIKit
 
 final class PlayerViewController: UIViewController {
 
-    private enum CountItem {
-        static let team = Picker.teams.count
-        static let position = Picker.positions.count
-    }
-
     @IBOutlet private var teamButton: UIButton!
     @IBOutlet private var positionButton: UIButton!
     @IBOutlet private var uploadImageButton: UIButton!
@@ -38,7 +33,7 @@ final class PlayerViewController: UIViewController {
         setupNavigationBar()
         setupUI()
         setTextFieldDelegate()
-        disableSearchButton()
+        disableSaveButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -88,7 +83,6 @@ final class PlayerViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-
     @IBAction func hideKeyboard(_ sender: UITapGestureRecognizer) {
         number.resignFirstResponder()
         fullName.resignFirstResponder()
@@ -135,7 +129,7 @@ private extension PlayerViewController {
         age.delegate = self
     }
 
-    func disableSearchButton() {
+    func disableSaveButton() {
         saveButton.isEnabled = false
         saveButton.alpha = 0.5
     }
@@ -173,6 +167,7 @@ extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationCon
 //MARK: UIPickerViewDataSource
 extension PlayerViewController: UIPickerViewDataSource {
     func showPickerView() {
+        pickerView.setDefaultValue()
         pickerView.backgroundColor = Color.lightGray
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -239,7 +234,7 @@ extension PlayerViewController: UITextFieldDelegate {
             let fullName = fullName.text, !fullName.isEmpty,
             let nationality = nationality.text, !nationality.isEmpty
             else {
-                disableSearchButton()
+                disableSaveButton()
                 return }
 
         enableSearchButton()

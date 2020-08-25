@@ -16,7 +16,6 @@ class RoudedCornerView: UIView {
     }
 
     private func setUpView () {
-
         clipsToBounds = true
         backgroundColor = .white
         layer.masksToBounds = false
@@ -26,5 +25,4 @@ class RoudedCornerView: UIView {
         layer.shadowRadius = 10
         layer.shadowOpacity = 1
     }
-
 }

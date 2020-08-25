@@ -46,3 +46,8 @@ struct Picker {
     
     static let teams = ["Free agent", "Real Madrid CF", "FC Bayern München", "FC Barcelona", "Club Atlético de Madrid", "Juventus", "Manchester City FC", "Paris Saint-Germain", "Sevilla FC", "Manchester United FC", "Liverpool FC", "Arsenal FC", "Borussia Dortmund", "Tottenham Hotspur", "FC Shakhtar Donetsk", "Chelsea FC", "Olympique Lyonnais"]
 }
+
+enum CountItem {
+    static let team = Picker.teams.count
+    static let position = Picker.positions.count
+}
