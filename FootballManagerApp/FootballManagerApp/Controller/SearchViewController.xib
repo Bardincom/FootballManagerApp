@@ -25,7 +25,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vY5-GR-5AN" customClass="RoudedCornerView" customModule="FootballManagerApp" customModuleProvider="target">
                     <rect key="frame" x="57.5" y="189.5" width="260" height="288"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hZ1-bO-rPi">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name contains" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hZ1-bO-rPi">
                             <rect key="frame" x="16" y="16" width="228" height="34"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -33,7 +33,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2r5-Z8-Fzb">
                             <rect key="frame" x="16" y="66" width="228" height="34"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVv-Lo-yhy">
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVv-Lo-yhy">
                                     <rect key="frame" x="0.0" y="0.0" width="110" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -102,10 +102,20 @@
                         <constraint firstItem="4if-ed-aVP" firstAttribute="top" secondItem="2r5-Z8-Fzb" secondAttribute="bottom" constant="32" id="zSi-Fp-mYz"/>
                     </constraints>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yW0-j8-sOH" customClass="PickerViewBlock" customModule="FootballManagerApp" customModuleProvider="target">
+                    <rect key="frame" x="57.5" y="189.5" width="260" height="288"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="260" id="tUf-7g-3Xm"/>
+                        <constraint firstAttribute="height" constant="288" id="xOw-hn-Pku"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
+                <constraint firstItem="yW0-j8-sOH" firstAttribute="centerY" secondItem="bWh-GB-avB" secondAttribute="centerY" id="5EF-Hz-8iR"/>
                 <constraint firstItem="bWh-GB-avB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6iy-7L-Xyx"/>
                 <constraint firstItem="vY5-GR-5AN" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="9Zo-De-Nuz"/>
+                <constraint firstItem="yW0-j8-sOH" firstAttribute="centerX" secondItem="bWh-GB-avB" secondAttribute="centerX" id="Si4-0H-WDN"/>
                 <constraint firstItem="vY5-GR-5AN" firstAttribute="centerX" secondItem="bWh-GB-avB" secondAttribute="centerX" id="ZIf-hm-bJp"/>
                 <constraint firstItem="vY5-GR-5AN" firstAttribute="centerY" secondItem="bWh-GB-avB" secondAttribute="centerY" id="et1-sw-61d"/>
                 <constraint firstItem="bWh-GB-avB" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="i1l-Um-eSv"/>

@@ -75,9 +75,9 @@ final class ButtonBlockView: UIView {
     }()
 
     override func awakeFromNib() {
-           super.awakeFromNib()
-           setupLayout()
-       }
+        super.awakeFromNib()
+        setupLayout()
+    }
 }
 
 private extension ButtonBlockView {
