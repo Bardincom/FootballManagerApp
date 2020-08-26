@@ -17,6 +17,12 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet private var age: UILabel!
     @IBOutlet private var position: UILabel!
     @IBOutlet private var foto: UIImageView!
+    @IBOutlet private var playerLocations: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        playerLocations.textColor = Color.gold
+    }
 
     func setupPlayer(_ player: Player) {
         team.text = player.club?.name
@@ -25,6 +31,7 @@ class MainTableViewCell: UITableViewCell {
         fullName.text = player.fullName
         position.text = player.position
         age.text = String(player.age)
+        playerLocations.text = player.inPlay ? Location.inPlay.rawValue : Location.Bench.rawValue
         guard
             let playerImage = player.image,
             let image = UIImage(data: playerImage)

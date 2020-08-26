@@ -8,6 +8,7 @@
         <attribute name="age" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="fullName" attributeType="String" defaultValueString=""/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="inPlay" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="nationality" attributeType="String" defaultValueString=""/>
         <attribute name="number" attributeType="Integer 16" minValueString="0" maxValueString="99" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="position" optional="YES" attributeType="String"/>
@@ -15,6 +16,6 @@
     </entity>
     <elements>
         <element name="Club" positionX="-54" positionY="-9" width="128" height="73"/>
-        <element name="Player" positionX="-306.89453125" positionY="-180.2578125" width="128" height="148"/>
+        <element name="Player" positionX="-306.89453125" positionY="-180.2578125" width="128" height="163"/>
     </elements>
 </model>

@@ -21,6 +21,7 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var foto: UIImageView!
     @IBOutlet private var pickerView: UIPickerView!
     @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet private var selectLocationPlayer: UISegmentedControl!
 
     lazy var coreDataManager = CoreDataManager.shared
     private var isTeamSelect: Bool = true
@@ -78,6 +79,8 @@ final class PlayerViewController: UIViewController {
         player.image = foto.image?.pngData()
         player.club = team
         player.position = selectPosition
+        print(selectLocationPlayer.selectedSegmentIndex)
+        player.inPlay = selectLocation(index: selectLocationPlayer.selectedSegmentIndex)
 
         coreDataManager.save(context: context)
         navigationController?.popViewController(animated: true)
@@ -137,6 +140,17 @@ private extension PlayerViewController {
     func enableSearchButton() {
         saveButton.isEnabled = true
         saveButton.alpha = 1
+    }
+
+    func selectLocation(index: Int) -> Bool {
+        var isPlay: Bool = true
+
+        switch index {
+            case 0: isPlay = true
+            case 1: isPlay = false
+            default: break
+        }
+        return isPlay
     }
 
     @objc

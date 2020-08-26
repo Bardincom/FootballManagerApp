@@ -30,7 +30,7 @@
             <subviews>
                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWh-GB-avB">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="lightGray"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vY5-GR-5AN" customClass="RoudedCornerView" customModule="FootballManagerApp" customModuleProvider="target">
                     <rect key="frame" x="57.5" y="189.5" width="260" height="288"/>

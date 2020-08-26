@@ -27,7 +27,7 @@ final class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupUI()
     }
 
     @IBAction func pressReset(_ sender: UIButton) {
@@ -49,6 +49,11 @@ final class SearchViewController: UIViewController {
         isTeamSelect = false
         viewWithPickerView.isHidden = false
         showPickerView()
+    }
+
+    func setupUI() {
+        resetButton.layer.cornerRadius = 5
+        searchButton.layer.cornerRadius = 5
     }
 }
 

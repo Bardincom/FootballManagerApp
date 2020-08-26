@@ -24,7 +24,7 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupNavigationBar()
+        setupUI()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +34,7 @@ final class MainViewController: UIViewController {
 }
 
 private extension MainViewController {
-    func setupNavigationBar() {
+    func setupUI() {
         title = Title.teamManager
 
         let addPlayer = UIBarButtonItem(image: Icon.addPerson,

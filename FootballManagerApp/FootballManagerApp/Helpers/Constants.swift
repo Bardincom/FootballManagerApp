@@ -51,3 +51,16 @@ enum CountItem {
     static let team = Picker.teams.count
     static let position = Picker.positions.count
 }
+
+enum Location: String {
+    case inPlay = "In play"
+    case Bench
+
+    var inPlay: Bool {
+        return self == .inPlay
+    }
+
+    var Bench: Bool {
+        return self == .Bench
+    }
+}
