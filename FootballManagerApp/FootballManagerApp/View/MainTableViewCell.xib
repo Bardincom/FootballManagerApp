@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -144,17 +144,25 @@
                             <constraint firstItem="w1F-vb-bGR" firstAttribute="leading" secondItem="YJW-O4-hg7" secondAttribute="leading" id="jDl-CG-Mls"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmB-sr-FZU">
+                        <rect key="frame" x="270" y="5" width="34" height="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="K67-70-pq5" secondAttribute="bottom" constant="11" id="14y-bz-36Y"/>
                     <constraint firstAttribute="bottom" secondItem="YJW-O4-hg7" secondAttribute="bottom" constant="11" id="79Q-p9-1Ya"/>
                     <constraint firstAttribute="trailing" secondItem="YJW-O4-hg7" secondAttribute="trailing" constant="16" id="DOa-z8-Obd"/>
                     <constraint firstItem="YJW-O4-hg7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="32" id="FAc-dM-Xlo"/>
+                    <constraint firstItem="YJW-O4-hg7" firstAttribute="top" secondItem="nmB-sr-FZU" secondAttribute="bottom" constant="11" id="FoU-Nq-mXN"/>
+                    <constraint firstItem="nmB-sr-FZU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="H2P-Gb-uLq"/>
                     <constraint firstItem="GfM-gK-MwI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="HLw-I6-FRx"/>
                     <constraint firstItem="K67-70-pq5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="IsA-Wy-Bfs"/>
                     <constraint firstItem="GfM-gK-MwI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="Kx1-eI-GVb"/>
+                    <constraint firstAttribute="trailing" secondItem="nmB-sr-FZU" secondAttribute="trailing" constant="16" id="YLg-EB-cnG"/>
                     <constraint firstItem="K67-70-pq5" firstAttribute="top" secondItem="GfM-gK-MwI" secondAttribute="bottom" constant="8.5" id="YUT-D3-Cz8"/>
-                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="GfM-gK-MwI" secondAttribute="trailing" constant="233" id="imi-ag-S77"/>
                     <constraint firstItem="YJW-O4-hg7" firstAttribute="leading" secondItem="K67-70-pq5" secondAttribute="trailing" constant="7" id="l1q-wZ-NxO"/>
                 </constraints>
             </tableViewCellContentView>
@@ -165,6 +173,7 @@
                 <outlet property="fullName" destination="fgB-eQ-nFf" id="ySe-Ev-fkG"/>
                 <outlet property="nationality" destination="Fgd-Zw-4ci" id="sQp-1R-hvb"/>
                 <outlet property="number" destination="JfP-C7-zEb" id="s6s-L1-jrJ"/>
+                <outlet property="playerLocation" destination="nmB-sr-FZU" id="JYD-eg-r6K"/>
                 <outlet property="position" destination="6O2-lw-uTT" id="IhR-bI-f5Z"/>
                 <outlet property="team" destination="kOc-1N-bKt" id="PZe-WY-WWS"/>
             </connections>

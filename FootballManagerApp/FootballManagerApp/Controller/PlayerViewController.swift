@@ -10,11 +10,6 @@ import UIKit
 
 final class PlayerViewController: UIViewController {
 
-    private enum CountItem {
-        static let team = Picker.teams.count
-        static let position = Picker.positions.count
-    }
-
     @IBOutlet private var teamButton: UIButton!
     @IBOutlet private var positionButton: UIButton!
     @IBOutlet private var uploadImageButton: UIButton!
@@ -26,6 +21,7 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var foto: UIImageView!
     @IBOutlet private var pickerView: UIPickerView!
     @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet private var selectLocationPlayer: UISegmentedControl!
 
     lazy var coreDataManager = CoreDataManager.shared
     private var isTeamSelect: Bool = true
@@ -38,7 +34,7 @@ final class PlayerViewController: UIViewController {
         setupNavigationBar()
         setupUI()
         setTextFieldDelegate()
-        disableSearchButton()
+        disableSaveButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -83,11 +79,12 @@ final class PlayerViewController: UIViewController {
         player.image = foto.image?.pngData()
         player.club = team
         player.position = selectPosition
+        print(selectLocationPlayer.selectedSegmentIndex)
+        player.inPlay = selectLocation(index: selectLocationPlayer.selectedSegmentIndex)
 
         coreDataManager.save(context: context)
         navigationController?.popViewController(animated: true)
     }
-
 
     @IBAction func hideKeyboard(_ sender: UITapGestureRecognizer) {
         number.resignFirstResponder()
@@ -135,7 +132,7 @@ private extension PlayerViewController {
         age.delegate = self
     }
 
-    func disableSearchButton() {
+    func disableSaveButton() {
         saveButton.isEnabled = false
         saveButton.alpha = 0.5
     }
@@ -143,6 +140,17 @@ private extension PlayerViewController {
     func enableSearchButton() {
         saveButton.isEnabled = true
         saveButton.alpha = 1
+    }
+
+    func selectLocation(index: Int) -> Bool {
+        var isPlay: Bool = true
+
+        switch index {
+            case 0: isPlay = true
+            case 1: isPlay = false
+            default: break
+        }
+        return isPlay
     }
 
     @objc
@@ -173,6 +181,7 @@ extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationCon
 //MARK: UIPickerViewDataSource
 extension PlayerViewController: UIPickerViewDataSource {
     func showPickerView() {
+        pickerView.setDefaultValue()
         pickerView.backgroundColor = Color.lightGray
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -239,7 +248,7 @@ extension PlayerViewController: UITextFieldDelegate {
             let fullName = fullName.text, !fullName.isEmpty,
             let nationality = nationality.text, !nationality.isEmpty
             else {
-                disableSearchButton()
+                disableSaveButton()
                 return }
 
         enableSearchButton()

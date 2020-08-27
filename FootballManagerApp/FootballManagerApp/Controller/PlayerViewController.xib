@@ -19,6 +19,7 @@
                 <outlet property="positionButton" destination="jVs-dM-vFM" id="Aas-Yr-5Hi"/>
                 <outlet property="saveButton" destination="kEN-jb-LRX" id="jZy-M0-Y0j"/>
                 <outlet property="scrollView" destination="8lp-6O-ZUC" id="r0u-pa-BLh"/>
+                <outlet property="selectLocationPlayer" destination="GvT-PN-PkT" id="Wo6-5J-U6c"/>
                 <outlet property="teamButton" destination="zX9-Eh-c5X" id="u3Q-lf-lnn"/>
                 <outlet property="uploadImageButton" destination="Npj-CE-WW8" id="ngh-eW-cBq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -75,15 +76,16 @@
                                         <constraint firstAttribute="height" constant="122" id="ewv-vL-VAC"/>
                                     </constraints>
                                 </stackView>
-                                <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GvT-PN-PkT">
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GvT-PN-PkT">
                                     <rect key="frame" x="16" y="16" width="343" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="31" id="udD-o9-RMC"/>
                                     </constraints>
                                     <segments>
-                                        <segment title="First"/>
-                                        <segment title="Second"/>
+                                        <segment title="In Play"/>
+                                        <segment title="Bench"/>
                                     </segments>
+                                    <color key="selectedSegmentTintColor" name="gold"/>
                                 </segmentedControl>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="5kq-dw-g8G">
                                     <rect key="frame" x="16" y="431" width="343" height="45"/>
@@ -119,7 +121,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="yiF-Kd-TOA"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
                                                     <state key="normal" title="Press to select"/>
                                                     <connections>
                                                         <action selector="pressToSelectTeam:" destination="-1" eventType="touchUpInside" id="S4n-FG-KbF"/>
