@@ -33,6 +33,7 @@ enum PickerLabel {
 enum Color {
     static let gold = UIColor(named: "gold")
     static let lightGray = UIColor(named: "lightGray")
+    static let oliveСolor = UIColor(named: "oliveСolor")
 }
 
 enum Button {

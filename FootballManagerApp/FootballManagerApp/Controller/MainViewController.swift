@@ -24,7 +24,7 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupUI()
+        setupNavigationBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +34,7 @@ final class MainViewController: UIViewController {
 }
 
 private extension MainViewController {
-    func setupUI() {
+    func setupNavigationBar() {
         title = Title.teamManager
 
         let addPlayer = UIBarButtonItem(image: Icon.addPerson,
@@ -43,9 +43,9 @@ private extension MainViewController {
                                         action: #selector(goToPlayerViewController))
 
         let searchPlayers = UIBarButtonItem(image: Icon.magnifyingglass,
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(goToSearchViewController))
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(goToSearchViewController))
 
         addPlayer.tintColor = Color.gold
         searchPlayers.tintColor = Color.gold

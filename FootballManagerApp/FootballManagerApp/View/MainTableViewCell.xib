@@ -145,8 +145,8 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmB-sr-FZU">
-                        <rect key="frame" x="271" y="5" width="33" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <rect key="frame" x="270" y="5" width="34" height="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -173,7 +173,7 @@
                 <outlet property="fullName" destination="fgB-eQ-nFf" id="ySe-Ev-fkG"/>
                 <outlet property="nationality" destination="Fgd-Zw-4ci" id="sQp-1R-hvb"/>
                 <outlet property="number" destination="JfP-C7-zEb" id="s6s-L1-jrJ"/>
-                <outlet property="playerLocations" destination="nmB-sr-FZU" id="JYD-eg-r6K"/>
+                <outlet property="playerLocation" destination="nmB-sr-FZU" id="JYD-eg-r6K"/>
                 <outlet property="position" destination="6O2-lw-uTT" id="IhR-bI-f5Z"/>
                 <outlet property="team" destination="kOc-1N-bKt" id="PZe-WY-WWS"/>
             </connections>
