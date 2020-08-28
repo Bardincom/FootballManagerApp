@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="FootballManagerApp" customModuleProvider="target">
             <connections>
                 <outlet property="mainTableView" destination="nQJ-ls-jN5" id="5eg-Tg-n5z"/>
+                <outlet property="playerLocationSegmentControl" destination="JdV-BY-8Ld" id="tOU-gt-6vK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,6 +35,9 @@
                         <segment title="Bench"/>
                     </segments>
                     <color key="selectedSegmentTintColor" name="gold"/>
+                    <connections>
+                        <action selector="displaySelectedPlayerLocation:" destination="-1" eventType="valueChanged" id="QS9-xU-QPv"/>
+                    </connections>
                 </segmentedControl>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
