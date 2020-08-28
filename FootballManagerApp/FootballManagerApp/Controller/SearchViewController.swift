@@ -135,23 +135,23 @@ private extension SearchViewController {
         var  predicate = [NSPredicate]()
 
         if !fullName.isEmpty {
-            let fullNamePredicate = NSPredicate(format: "fullName CONTAINS[cd] '\(fullName)'")
+            let fullNamePredicate = NSPredicate(format: "\(Predicate.fullName) CONTAINS[cd] '\(fullName)'")
             predicate.append(fullNamePredicate)
         }
 
         if !age.isEmpty {
             let selectedSegmentControl = ageSearchConditin(index: segmentControl.selectedSegmentIndex)
-            let agePredicate = NSPredicate(format: "age \(selectedSegmentControl) '\(age)'")
+            let agePredicate = NSPredicate(format: "\(Predicate.age) \(selectedSegmentControl) '\(age)'")
             predicate.append(agePredicate)
         }
 
         if !team.isEmpty {
-            let teamPredicate = NSPredicate(format: "club.name CONTAINS[cd] '\(team)'")
+            let teamPredicate = NSPredicate(format: "\(Predicate.clubName) CONTAINS[cd] '\(team)'")
             predicate.append(teamPredicate)
         }
 
         if !position.isEmpty {
-            let positionPredicate = NSPredicate(format: "position CONTAINS[cd] '\(position)'")
+            let positionPredicate = NSPredicate(format: "\(Predicate.position) CONTAINS[cd] '\(position)'")
             predicate.append(positionPredicate)
         }
 

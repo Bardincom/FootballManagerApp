@@ -76,7 +76,7 @@ final class CoreDataManager {
 
         request = entity.fetchRequest() as! NSFetchRequest<T>
 
-        let ageSortDescriptor = NSSortDescriptor(key: "age", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))
+        let ageSortDescriptor = NSSortDescriptor(key: Predicate.age, ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))
 
         request.predicate = predicate
         request.sortDescriptors = [ageSortDescriptor]

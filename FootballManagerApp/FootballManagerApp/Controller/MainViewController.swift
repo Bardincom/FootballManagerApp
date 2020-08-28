@@ -21,7 +21,7 @@ final class MainViewController: UIViewController {
     lazy var coreDataManager = CoreDataManager.shared
     private var selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [])
 
-    var players = [Player]()
+    private var players = [Player]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ final class MainViewController: UIViewController {
         fetchData()
     }
 
-    @IBAction func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
+    @IBAction private func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
         players.removeAll()
         fetchData(predicate: selectedPredicate)
         mainTableView.reloadData()
@@ -43,8 +43,6 @@ final class MainViewController: UIViewController {
 
 private extension MainViewController {
     func setupNavigationBar() {
-        title = Title.teamManager
-
         let addPlayer = UIBarButtonItem(image: Icon.addPerson,
                                         style: .plain,
                                         target: self,
@@ -129,8 +127,10 @@ extension MainViewController: UITableViewDataSource {
 }
 
 extension MainViewController: UITableViewDelegate {
-    //TODO: didSelectRowAt indexPath
-
+    //TODO: Logic didSelectRowAt
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        mainTableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension MainViewController: SearchViewControllerDelegate {
