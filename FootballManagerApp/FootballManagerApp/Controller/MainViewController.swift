@@ -16,10 +16,12 @@ final class MainViewController: UIViewController {
             newValue.tableFooterView = UIView()
         }
     }
+    @IBOutlet private var playerLocationSegmentControl: UISegmentedControl!
     
     lazy var coreDataManager = CoreDataManager.shared
+    private var selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [])
 
-    var players = [Player]()
+    private var players = [Player]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +33,16 @@ final class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         fetchData()
     }
+
+    @IBAction private func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
+        players.removeAll()
+        fetchData(predicate: selectedPredicate)
+        mainTableView.reloadData()
+    }
 }
 
 private extension MainViewController {
     func setupNavigationBar() {
-        title = Title.teamManager
-
         let addPlayer = UIBarButtonItem(image: Icon.addPerson,
                                         style: .plain,
                                         target: self,
@@ -56,8 +62,20 @@ private extension MainViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
-    func fetchData() {
-        players = coreDataManager.fetchData(for: Player.self)
+    func fetchData(predicate: NSCompoundPredicate? = nil) {
+
+        let fetchedPlayers = coreDataManager.fetchData(for: Player.self, predicate: predicate)
+
+        switch playerLocationSegmentControl.selectedSegmentIndex {
+            case 0:
+                players = fetchedPlayers
+            case 1:
+                players = fetchedPlayers.filter({$0.inPlay})
+            case 2:
+                players = fetchedPlayers.filter({!$0.inPlay})
+            default:
+                break
+        }
 
         if !players.isEmpty {
             mainTableView.isHidden = false
@@ -70,6 +88,7 @@ private extension MainViewController {
     @objc
     func goToSearchViewController() {
         let searchViewController = SearchViewController()
+        searchViewController.delegate = self
         searchViewController.modalTransitionStyle = .crossDissolve
         searchViewController.modalPresentationStyle = .overCurrentContext
         present(searchViewController, animated: true, completion: nil)
@@ -108,6 +127,16 @@ extension MainViewController: UITableViewDataSource {
 }
 
 extension MainViewController: UITableViewDelegate {
-    //TODO: didSelectRowAt indexPath
+    //TODO: Logic didSelectRowAt
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        mainTableView.deselectRow(at: indexPath, animated: true)
+    }
+}
 
+extension MainViewController: SearchViewControllerDelegate {
+    func viewController(_ viewController: SearchViewController, didPassedData predicate: NSCompoundPredicate) {
+        fetchData(predicate: predicate)
+        selectedPredicate = predicate
+        mainTableView.reloadData()
+    }
 }

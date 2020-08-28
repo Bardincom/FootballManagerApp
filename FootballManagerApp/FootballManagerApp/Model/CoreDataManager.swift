@@ -69,12 +69,17 @@ final class CoreDataManager {
         save(context: context)
     }
 
-    func fetchData<T: NSManagedObject>(for entity: T.Type) -> [T] {
+    func fetchData<T: NSManagedObject>(for entity: T.Type, predicate: NSCompoundPredicate? = nil) -> [T] {
         let context = getContext()
         let request: NSFetchRequest<T>
         var fetchResult = [T]()
 
         request = entity.fetchRequest() as! NSFetchRequest<T>
+
+        let ageSortDescriptor = NSSortDescriptor(key: Predicate.age, ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))
+
+        request.predicate = predicate
+        request.sortDescriptors = [ageSortDescriptor]
 
         do {
             fetchResult = try context.fetch(request)
@@ -84,5 +89,4 @@ final class CoreDataManager {
 
         return fetchResult
     }
-
 }

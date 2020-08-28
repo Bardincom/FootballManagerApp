@@ -42,23 +42,23 @@ final class PlayerViewController: UIViewController {
         notificationAddObserver(#selector(keyboardWillShow(notification:)))
     }
 
-    @IBAction func uploadImage(_ sender: UIButton) {
+    @IBAction private func uploadImage(_ sender: UIButton) {
         showImagePickerController()
     }
 
-    @IBAction func pressToSelectTeam(_ sender: UIButton) {
+    @IBAction private func pressToSelectTeam(_ sender: UIButton) {
         isTeamSelect = true
         pickerView.isHidden = false
         showPickerView()
     }
 
-    @IBAction func pressToSelectPosition(_ sender: UIButton) {
+    @IBAction private func pressToSelectPosition(_ sender: UIButton) {
         isTeamSelect = false
         pickerView.isHidden = false
         showPickerView()
     }
 
-    @IBAction func savePlayer(_ sender: UIButton) {
+    @IBAction private func savePlayer(_ sender: UIButton) {
         guard selectTeam != nil else {
             Alert.showAlert(self) {
                 self.pressToSelectTeam(self.teamButton)
@@ -86,7 +86,7 @@ final class PlayerViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-    @IBAction func hideKeyboard(_ sender: UITapGestureRecognizer) {
+    @IBAction private func hideKeyboard(_ sender: UITapGestureRecognizer) {
         number.resignFirstResponder()
         fullName.resignFirstResponder()
         nationality.resignFirstResponder()

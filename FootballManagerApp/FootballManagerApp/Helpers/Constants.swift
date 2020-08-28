@@ -65,3 +65,10 @@ enum Location: String {
         return self == .Bench
     }
 }
+
+enum Predicate {
+    static let fullName = "fullName"
+    static let age = "age"
+    static let clubName = "club.name"
+    static let position = "position"
+}
