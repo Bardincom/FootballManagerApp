@@ -69,24 +69,33 @@ final class CoreDataManager {
         save(context: context)
     }
 
-    func fetchData<T: NSManagedObject>(for entity: T.Type, predicate: NSCompoundPredicate? = nil) -> [T] {
+    func fetchData<T: NSManagedObject>(for entity: T.Type,
+                                       selectionNameKeyPath: String? = nil,
+                                       predicate: NSCompoundPredicate? = nil) -> NSFetchedResultsController<T> {
         let context = getContext()
         let request: NSFetchRequest<T>
         var fetchResult = [T]()
 
         request = entity.fetchRequest() as! NSFetchRequest<T>
 
-        let ageSortDescriptor = NSSortDescriptor(key: Predicate.age, ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))
+        let ageSortDescriptor = NSSortDescriptor(key: Predicate.position,
+                                                 ascending: true,
+                                                 selector: #selector(NSString.localizedStandardCompare(_:)))
 
         request.predicate = predicate
         request.sortDescriptors = [ageSortDescriptor]
 
+        let controller = NSFetchedResultsController(fetchRequest: request,
+                                                    managedObjectContext: context,
+                                                    sectionNameKeyPath: selectionNameKeyPath,
+                                                    cacheName: nil)
+
         do {
-            fetchResult = try context.fetch(request)
+            try controller.performFetch()
         } catch {
             debugPrint("Could not fetch: \(error.localizedDescription)")
         }
 
-        return fetchResult
+        return controller
     }
 }

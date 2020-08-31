@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 final class MainViewController: UIViewController {
 
@@ -19,23 +20,24 @@ final class MainViewController: UIViewController {
     @IBOutlet private var playerLocationSegmentControl: UISegmentedControl!
     
     lazy var coreDataManager = CoreDataManager.shared
+    var fetchedResultController: NSFetchedResultsController<Player>?
     private var selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [])
 
-    private var players = [Player]()
+    //    private var players = [Player]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupNavigationBar()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         fetchData()
     }
 
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //        fetchData()
+    //    }
+
     @IBAction private func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
-        players.removeAll()
+//        players.removeAll()
         fetchData(predicate: selectedPredicate)
         mainTableView.reloadData()
     }
@@ -64,19 +66,29 @@ private extension MainViewController {
 
     func fetchData(predicate: NSCompoundPredicate? = nil) {
 
-        let fetchedPlayers = coreDataManager.fetchData(for: Player.self, predicate: predicate)
+        fetchedResultController = coreDataManager.fetchData(for: Player.self, selectionNameKeyPath: Predicate.position, predicate: predicate)
+        fetchedResultController?.delegate = self
 
-        switch playerLocationSegmentControl.selectedSegmentIndex {
-            case 0:
-                players = fetchedPlayers
-            case 1:
-                players = fetchedPlayers.filter({$0.inPlay})
-            case 2:
-                players = fetchedPlayers.filter({!$0.inPlay})
-            default:
-                break
-        }
+        fetchedObjectsCheck()
 
+        //        let fetchedPlayers = coreDataManager.fetchData(for: Player.self, predicate: predicate)
+        //
+        //        guard let players = fetchedResultController?.fetchedObjects else { return }
+        //
+        //        switch playerLocationSegmentControl.selectedSegmentIndex {
+        //            case 0:
+        ////                players = fetchedPlayers
+        //            case 1:
+        //                players = fetchedPlayers.filter({$0.inPlay})
+        //            case 2:
+        //                players = fetchedPlayers.filter({!$0.inPlay})
+        //            default:
+        //                break
+        //        }
+    }
+
+    private func fetchedObjectsCheck() {
+        guard let players = fetchedResultController?.fetchedObjects else { return }
         if !players.isEmpty {
             mainTableView.isHidden = false
         } else {
@@ -103,27 +115,39 @@ private extension MainViewController {
 
 //MARK: TableViewDataSource
 extension MainViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let sections = fetchedResultController?.sections else { return 0 }
+        return sections.count
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultController?.sections else { return nil }
+        return sections[section].name
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        players.count
+        guard let sections = fetchedResultController?.sections else { return 0 }
+        return sections[section].numberOfObjects
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(reusable: MainTableViewCell.self, for: indexPath)
-        let player = players[indexPath.row]
+//        let player = players[indexPath.row]
+        guard let player = fetchedResultController?.object(at: indexPath) else {return cell}
         cell.setupPlayer(player)
         return cell
     }
 
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        let player = players[indexPath.row]
-
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
-            self.coreDataManager.delete(object: player)
-            self.fetchData()
-        }
-        return UISwipeActionsConfiguration(actions: [deleteAction])
-    }
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//
+//        let player = players[indexPath.row]
+//
+//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
+//            self.coreDataManager.delete(object: player)
+//            self.fetchData()
+//        }
+//        return UISwipeActionsConfiguration(actions: [deleteAction])
+//    }
 }
 
 extension MainViewController: UITableViewDelegate {
@@ -139,4 +163,8 @@ extension MainViewController: SearchViewControllerDelegate {
         selectedPredicate = predicate
         mainTableView.reloadData()
     }
+}
+
+extension MainViewController: NSFetchedResultsControllerDelegate {
+
 }
