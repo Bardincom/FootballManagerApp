@@ -74,11 +74,11 @@ final class CoreDataManager {
                                        predicate: NSCompoundPredicate? = nil) -> NSFetchedResultsController<T> {
         let context = getContext()
         let request: NSFetchRequest<T>
-        var fetchResult = [T]()
+//        var fetchResult = [T]()
 
         request = entity.fetchRequest() as! NSFetchRequest<T>
 
-        let ageSortDescriptor = NSSortDescriptor(key: Predicate.position,
+        let ageSortDescriptor = NSSortDescriptor(key: SortDescriptorKey.position,
                                                  ascending: true,
                                                  selector: #selector(NSString.localizedStandardCompare(_:)))
 

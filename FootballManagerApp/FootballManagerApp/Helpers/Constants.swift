@@ -72,3 +72,7 @@ enum Predicate {
     static let clubName = "club.name"
     static let position = "position"
 }
+
+enum SortDescriptorKey {
+    static let position = "position"
+}
