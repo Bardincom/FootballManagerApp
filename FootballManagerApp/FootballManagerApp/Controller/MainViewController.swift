@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 final class MainViewController: UIViewController {
 
@@ -19,25 +20,18 @@ final class MainViewController: UIViewController {
     @IBOutlet private var playerLocationSegmentControl: UISegmentedControl!
     
     lazy var coreDataManager = CoreDataManager.shared
+    var fetchedResultController: NSFetchedResultsController<Player>?
     private var selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [])
-
-    private var players = [Player]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupNavigationBar()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         fetchData()
     }
 
     @IBAction private func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
-        players.removeAll()
+
         fetchData(predicate: selectedPredicate)
-        mainTableView.reloadData()
     }
 }
 
@@ -64,25 +58,32 @@ private extension MainViewController {
 
     func fetchData(predicate: NSCompoundPredicate? = nil) {
 
-        let fetchedPlayers = coreDataManager.fetchData(for: Player.self, predicate: predicate)
-
+        //TODO: Фильтрацию по локации игрока
         switch playerLocationSegmentControl.selectedSegmentIndex {
             case 0:
-                players = fetchedPlayers
+                fetchedResultController = coreDataManager.fetchData(for: Player.self,
+                                                                    selectionNameKeyPath: SortDescriptorKey.position,
+                                                                    predicate: predicate)
             case 1:
-                players = fetchedPlayers.filter({$0.inPlay})
+                print("In Play")
             case 2:
-                players = fetchedPlayers.filter({!$0.inPlay})
+                print("Bench")
             default:
                 break
         }
+
+        fetchedResultController?.delegate = self
+        fetchedObjectsCheck()
+    }
+
+    private func fetchedObjectsCheck() {
+        guard let players = fetchedResultController?.fetchedObjects else { return }
 
         if !players.isEmpty {
             mainTableView.isHidden = false
         } else {
             mainTableView.isHidden = true
         }
-        mainTableView.reloadData()
     }
 
     @objc
@@ -103,25 +104,35 @@ private extension MainViewController {
 
 //MARK: TableViewDataSource
 extension MainViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let sections = fetchedResultController?.sections else { return 0 }
+        return sections.count
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultController?.sections else { return nil }
+        return sections[section].name
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        players.count
+        guard let sections = fetchedResultController?.sections else { return 0 }
+        return sections[section].numberOfObjects
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(reusable: MainTableViewCell.self, for: indexPath)
-        let player = players[indexPath.row]
+
+        guard let player = fetchedResultController?.object(at: indexPath) else {return cell}
         cell.setupPlayer(player)
         return cell
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        let player = players[indexPath.row]
-
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
+            guard let player = self.fetchedResultController?.object(at: indexPath) else { return }
             self.coreDataManager.delete(object: player)
-            self.fetchData()
         }
+
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
@@ -138,5 +149,68 @@ extension MainViewController: SearchViewControllerDelegate {
         fetchData(predicate: predicate)
         selectedPredicate = predicate
         mainTableView.reloadData()
+    }
+}
+
+extension MainViewController: NSFetchedResultsControllerDelegate {
+
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        mainTableView.beginUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+                    atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType) {
+        switch type {
+            case .insert:
+                mainTableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+            case .delete:
+                mainTableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+            default:
+                return
+        }
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+            case .insert:
+                if let indexPath = newIndexPath {
+                    mainTableView.insertRows(at: [indexPath], with: .fade)
+                    fetchedObjectsCheck()
+            }
+
+            case .delete:
+                if let indexPath = indexPath {
+                    mainTableView.deleteRows(at: [indexPath], with: .fade)
+                    fetchedObjectsCheck()
+            }
+
+            case .update:
+                if let indexPath = indexPath {
+                    let cell = mainTableView.cellForRow(at: indexPath) as! MainTableViewCell
+                    guard let player = fetchedResultController?.object(at: indexPath as IndexPath) else { return }
+                    cell.setupPlayer(player)
+            }
+
+            case .move:
+                if let indexPath = indexPath {
+                    self.mainTableView.deleteRows(at: [indexPath], with: .fade)
+                }
+
+                if let indexPath = newIndexPath {
+                    self.mainTableView.insertRows(at: [indexPath], with: .fade)
+            }
+            @unknown default:
+                fatalError()
+        }
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        mainTableView.endUpdates()
     }
 }
