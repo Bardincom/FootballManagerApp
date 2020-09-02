@@ -81,7 +81,6 @@ final class PlayerViewController: UIViewController {
         player.image = foto.image?.pngData()
         player.club = team
         player.position = selectPosition
-        print(selectLocationPlayer.selectedSegmentIndex)
         player.inPlay = selectLocation(index: selectLocationPlayer.selectedSegmentIndex)
 
         coreDataManager.save(context: context)
