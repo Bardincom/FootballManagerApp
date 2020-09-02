@@ -128,12 +128,21 @@ extension MainViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
             guard let player = self.fetchedResultController?.object(at: indexPath) else { return }
             self.coreDataManager.delete(object: player)
         }
 
-        return UISwipeActionsConfiguration(actions: [deleteAction])
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, success) in
+            guard let player = self.fetchedResultController?.object(at: indexPath) else { return }
+            let playerViewController = PlayerViewController()
+            playerViewController.selectPlayer = player
+            self.navigationController?.pushViewController(playerViewController, animated: true)
+        }
+
+        editAction.backgroundColor = .orange
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
     }
 }
 
@@ -165,6 +174,8 @@ extension MainViewController: NSFetchedResultsControllerDelegate {
         switch type {
             case .insert:
                 mainTableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+            case .update:
+                mainTableView.reloadSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
             case .delete:
                 mainTableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
             default:

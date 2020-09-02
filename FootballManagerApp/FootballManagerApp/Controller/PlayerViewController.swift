@@ -28,6 +28,7 @@ final class PlayerViewController: UIViewController {
     private var selectTeam: String?
     private var selectPosition: String?
     private var chosenImage = #imageLiteral(resourceName: "defaultImage")
+    var selectPlayer: Player?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ final class PlayerViewController: UIViewController {
         setupUI()
         setTextFieldDelegate()
         disableSaveButton()
+        displayPlayer()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +105,30 @@ private extension PlayerViewController {
         navigationItem.leftBarButtonItem = .some(backButton)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+    }
+
+    func displayPlayer() {
+        enableSearchButton()
+        guard let selectPlayer = selectPlayer else { return }
+        fullName.text = selectPlayer.fullName
+        number.text = String(describing: selectPlayer.number)
+        nationality.text = selectPlayer.nationality
+        age.text =  String(describing: selectPlayer.age)
+        teamButton.setTitle(selectPlayer.club?.name, for: .normal)
+        selectTeam = selectPlayer.club?.name
+        positionButton.setTitle(selectPlayer.position, for: .normal)
+        selectPosition = selectPlayer.position
+        if selectPlayer.inPlay {
+            selectLocationPlayer.selectedSegmentIndex = 0
+        } else {
+            selectLocationPlayer.selectedSegmentIndex = 1
+        }
+
+        guard
+            let playerImage = selectPlayer.image,
+            let image = UIImage(data: playerImage)
+            else { return }
+        foto.image = image
     }
 
     func setupUI() {
