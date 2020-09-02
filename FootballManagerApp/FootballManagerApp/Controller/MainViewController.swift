@@ -86,6 +86,10 @@ private extension MainViewController {
         }
     }
 
+    func showPlayerLocation(_ player: Player) -> String? {
+        return player.inPlay ? Location.inPlay.rawValue : Location.Bench.rawValue
+    }
+
     @objc
     func goToSearchViewController() {
         let searchViewController = SearchViewController()
@@ -128,21 +132,30 @@ extension MainViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let player = self.fetchedResultController?.object(at: indexPath) else { return nil}
+
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-            guard let player = self.fetchedResultController?.object(at: indexPath) else { return }
+
             self.coreDataManager.delete(object: player)
         }
 
-        let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, success) in
-            guard let player = self.fetchedResultController?.object(at: indexPath) else { return }
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { (_, _, _) in
             let playerViewController = PlayerViewController()
             playerViewController.selectPlayer = player
             self.navigationController?.pushViewController(playerViewController, animated: true)
         }
 
-        editAction.backgroundColor = .orange
+        let locationPlayer = UIContextualAction(style: .normal, title: showPlayerLocation(player)) { (_, _, _) in
 
-        return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+            player.inPlay ? (player.inPlay = false) : (player.inPlay = true)
+
+            self.coreDataManager.save()
+        }
+
+        editAction.backgroundColor = .orange
+        locationPlayer.backgroundColor = .purple
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, editAction, locationPlayer])
     }
 }
 
@@ -174,8 +187,6 @@ extension MainViewController: NSFetchedResultsControllerDelegate {
         switch type {
             case .insert:
                 mainTableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
-            case .update:
-                mainTableView.reloadSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
             case .delete:
                 mainTableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
             default:
