@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SearchViewControllerDelegate: class {
-    func viewController(_ viewController: SearchViewController, didPassedData predicate: NSCompoundPredicate)
+    func viewController(_ viewController: SearchViewController, didPassedData predicate: [NSPredicate])
 }
 
 final class SearchViewController: UIViewController {
@@ -38,7 +38,7 @@ final class SearchViewController: UIViewController {
 
     @IBAction func pressReset(_ sender: UIButton) {
         guard let delegate = delegate else { return }
-        delegate.viewController(self, didPassedData: NSCompoundPredicate(andPredicateWithSubpredicates: []))
+        delegate.viewController(self, didPassedData: [NSPredicate]())
         dismiss(animated: true, completion: nil)
     }
     @IBAction func pressSearch(_ sender: UIButton) {
@@ -48,8 +48,8 @@ final class SearchViewController: UIViewController {
         let team = selectTeam ?? ""
         let position = selectPosition ?? ""
 
-        let compoundPredecate = makeCompoundPredicate(fullName: name, age: age, team: team, position: position)
-        delegate.viewController(self, didPassedData: compoundPredecate)
+        let predecate = makePredicate(fullName: name, age: age, team: team, position: position)
+        delegate.viewController(self, didPassedData: predecate)
         dismiss(animated: true, completion: nil)
     }
 
@@ -127,10 +127,11 @@ extension SearchViewController: UIPickerViewDataSource {
 }
 
 private extension SearchViewController {
-    func makeCompoundPredicate(fullName: String,
+
+    func makePredicate(fullName: String,
                                age: String,
                                team: String,
-                               position: String) -> NSCompoundPredicate {
+                               position: String) -> [NSPredicate] {
 
         var  predicate = [NSPredicate]()
 
@@ -155,7 +156,7 @@ private extension SearchViewController {
             predicate.append(positionPredicate)
         }
 
-        return NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
+        return predicate
     }
 
     func ageSearchConditin(index: Int) -> String {

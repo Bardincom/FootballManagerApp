@@ -20,8 +20,12 @@ final class MainViewController: UIViewController {
     @IBOutlet private var playerLocationSegmentControl: UISegmentedControl!
     
     lazy var coreDataManager = CoreDataManager.shared
-    var fetchedResultController: NSFetchedResultsController<Player>?
-    private var selectedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [])
+    private var fetchedResultController: NSFetchedResultsController<Player>?
+    private var searchPredicate = [NSPredicate]()
+    private var locationPredicate = [NSPredicate]()
+    private var selectedCompoundPredicate: NSCompoundPredicate {
+        NSCompoundPredicate(andPredicateWithSubpredicates: searchPredicate + locationPredicate)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +39,15 @@ final class MainViewController: UIViewController {
     }
 
     @IBAction private func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
-        fetchData(predicate: selectedPredicate)
+
+        guard let location = locationConditin(index: playerLocationSegmentControl.selectedSegmentIndex) else {
+            fetchData()
+            return }
+
+        locationPredicate.append(makePredicate(location: location))
+
+        fetchData()
+        locationPredicate.removeAll()
     }
 }
 
@@ -60,24 +72,46 @@ private extension MainViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
-    func fetchData(predicate: NSCompoundPredicate? = nil) {
+    func fetchData() {
 
-        //TODO: Фильтрацию по локации игрока
+        let fetchedResult = coreDataManager.fetchData(for: Player.self,
+                                                      selectionNameKeyPath: SortDescriptorKey.position,
+                                                      predicate: selectedCompoundPredicate)
+
+        // Фильтрация по локации игрока
         switch playerLocationSegmentControl.selectedSegmentIndex {
             case 0:
-                fetchedResultController = coreDataManager.fetchData(for: Player.self,
-                                                                    selectionNameKeyPath: SortDescriptorKey.position,
-                                                                    predicate: predicate)
+                fetchedResultController = fetchedResult
             case 1:
-                print("In Play")
+                fetchedResultController = fetchedResult
             case 2:
-                print("Bench")
+                fetchedResultController = fetchedResult
             default:
                 break
         }
 
         fetchedResultController?.delegate = self
         fetchedObjectsCheck()
+    }
+
+    func makePredicate(location: Bool) -> NSPredicate {
+        guard let location = locationConditin(index: playerLocationSegmentControl.selectedSegmentIndex) else {
+            return NSPredicate() }
+
+        return NSPredicate(format: "inPlay == %@", NSNumber(value: location))
+    }
+
+    func locationConditin(index: Int) -> Bool? {
+        var condition: Bool?
+
+        switch index {
+            case 0: condition = nil
+            case 1: condition = true
+            case 2: condition = false
+            default: break
+        }
+
+        return condition
     }
 
     func fetchedObjectsCheck() {
@@ -88,6 +122,7 @@ private extension MainViewController {
         } else {
             mainTableView.isHidden = true
         }
+        mainTableView.reloadData()
     }
 
     func showPlayerLocation(_ player: Player) -> String? {
@@ -96,6 +131,7 @@ private extension MainViewController {
 
     @objc
     func goToSearchViewController() {
+        playerLocationSegmentControl.selectedSegmentIndex = 0
         let searchViewController = SearchViewController()
         searchViewController.delegate = self
         searchViewController.modalTransitionStyle = .crossDissolve
@@ -165,18 +201,11 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 
-extension MainViewController: UITableViewDelegate {
-
-    //TODO: Logic didSelectRowAt
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        mainTableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
 extension MainViewController: SearchViewControllerDelegate {
-    func viewController(_ viewController: SearchViewController, didPassedData predicate: NSCompoundPredicate) {
-        fetchData(predicate: predicate)
-        selectedPredicate = predicate
+    func viewController(_ viewController: SearchViewController, didPassedData predicate: [NSPredicate]) {
+        searchPredicate = predicate
+        fetchData()
+        mainTableView.reloadData()
     }
 }
 
@@ -229,7 +258,7 @@ extension MainViewController: NSFetchedResultsControllerDelegate {
                 if let indexPath = indexPath {
                     self.mainTableView.deleteRows(at: [indexPath], with: .fade)
                 }
-
+                
                 if let indexPath = newIndexPath {
                     self.mainTableView.insertRows(at: [indexPath], with: .fade)
             }
@@ -240,5 +269,11 @@ extension MainViewController: NSFetchedResultsControllerDelegate {
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         mainTableView.endUpdates()
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        mainTableView.deselectRow(at: indexPath, animated: true)
     }
 }
