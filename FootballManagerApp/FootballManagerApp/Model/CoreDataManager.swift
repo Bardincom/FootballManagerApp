@@ -73,7 +73,6 @@ final class CoreDataManager {
                                        selectionNameKeyPath: String? = nil,
                                        predicate: NSCompoundPredicate? = nil) -> NSFetchedResultsController<T> {
         let context = getContext()
-        context.mergePolicy = NSMergePolicy(merge: .overwriteMergePolicyType)
         
         let request: NSFetchRequest<T>
 

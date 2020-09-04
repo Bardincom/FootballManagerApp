@@ -45,7 +45,10 @@ final class PlayerViewController: UIViewController {
     }
 
     @IBAction private func uploadImage(_ sender: UIButton) {
+        ActivityIndicator.start()
         showImagePickerController()
+
+
     }
 
     @IBAction private func pressToSelectTeam(_ sender: UIButton) {
@@ -67,23 +70,19 @@ final class PlayerViewController: UIViewController {
             }
             return
         }
-        
-        let context = coreDataManager.getContext()
 
-        let team = coreDataManager.createObject(from: Club.self)
-        team.name = selectTeam
+        guard let selectPlayer = selectPlayer else {
+            let team = coreDataManager.createObject(from: Club.self)
+            team.name = selectTeam
 
-        let player = coreDataManager.createObject(from: Player.self)
-        player.fullName = fullName.text
-        player.nationality = nationality.text
-        player.age = Int16(age.text ?? "0") ?? 0
-        player.number = Int16(number.text ?? "0") ?? 0
-        player.image = foto.image?.pngData()
-        player.club = team
-        player.position = selectPosition
-        player.inPlay = selectLocation(index: selectLocationPlayer.selectedSegmentIndex)
+            let player = coreDataManager.createObject(from: Player.self)
 
-        coreDataManager.save(context: context)
+            setPlayer(player, of: team)
+
+            navigationController?.popViewController(animated: false)
+            return }
+
+        setPlayer(selectPlayer)
         navigationController?.popViewController(animated: true)
     }
 
@@ -104,6 +103,21 @@ private extension PlayerViewController {
         navigationItem.leftBarButtonItem = .some(backButton)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+    }
+
+    func setPlayer(_ player: Player,  of team: Club? = nil) {
+        player.fullName = fullName.text
+        player.nationality = nationality.text
+        player.age = Int16(age.text ?? "0") ?? 0
+        player.number = Int16(number.text ?? "0") ?? 0
+        player.image = foto.image?.pngData()
+        player.position = selectPosition
+        player.inPlay = selectLocation(index: selectLocationPlayer.selectedSegmentIndex)
+
+        guard let team = team else {
+            player.club?.name = selectTeam
+            return }
+        player.club = team
     }
 
     func displayPlayer() {
@@ -139,7 +153,6 @@ private extension PlayerViewController {
     }
 
     func showImagePickerController() {
-        ActivityIndicator.start()
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true

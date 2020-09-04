@@ -13,11 +13,6 @@
         <attribute name="number" attributeType="Integer 16" minValueString="0" maxValueString="99" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="position" optional="YES" attributeType="String"/>
         <relationship name="club" maxCount="1" deletionRule="Cascade" destinationEntity="Club" inverseName="player" inverseEntity="Club"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="fullName"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
     </entity>
     <elements>
         <element name="Club" positionX="-54" positionY="-9" width="128" height="73"/>

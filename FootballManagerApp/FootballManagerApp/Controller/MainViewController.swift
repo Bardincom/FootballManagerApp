@@ -29,8 +29,12 @@ final class MainViewController: UIViewController {
         fetchData()
     }
 
-    @IBAction private func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        coreDataManager.save()
+    }
 
+    @IBAction private func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
         fetchData(predicate: selectedPredicate)
     }
 }
@@ -76,7 +80,7 @@ private extension MainViewController {
         fetchedObjectsCheck()
     }
 
-    private func fetchedObjectsCheck() {
+    func fetchedObjectsCheck() {
         guard let players = fetchedResultController?.fetchedObjects else { return }
 
         if !players.isEmpty {
@@ -155,11 +159,14 @@ extension MainViewController: UITableViewDataSource {
         editAction.backgroundColor = .orange
         locationPlayer.backgroundColor = .purple
 
-        return UISwipeActionsConfiguration(actions: [deleteAction, editAction, locationPlayer])
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction, locationPlayer])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
 }
 
 extension MainViewController: UITableViewDelegate {
+
     //TODO: Logic didSelectRowAt
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mainTableView.deselectRow(at: indexPath, animated: true)
@@ -170,7 +177,6 @@ extension MainViewController: SearchViewControllerDelegate {
     func viewController(_ viewController: SearchViewController, didPassedData predicate: NSCompoundPredicate) {
         fetchData(predicate: predicate)
         selectedPredicate = predicate
-        mainTableView.reloadData()
     }
 }
 
