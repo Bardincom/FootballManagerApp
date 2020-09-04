@@ -28,6 +28,7 @@ final class PlayerViewController: UIViewController {
     private var selectTeam: String?
     private var selectPosition: String?
     private var chosenImage = #imageLiteral(resourceName: "defaultImage")
+    var selectPlayer: Player?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ final class PlayerViewController: UIViewController {
         setupUI()
         setTextFieldDelegate()
         disableSaveButton()
+        displayPlayer()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +45,10 @@ final class PlayerViewController: UIViewController {
     }
 
     @IBAction private func uploadImage(_ sender: UIButton) {
+        ActivityIndicator.start()
         showImagePickerController()
+
+
     }
 
     @IBAction private func pressToSelectTeam(_ sender: UIButton) {
@@ -65,24 +70,19 @@ final class PlayerViewController: UIViewController {
             }
             return
         }
-        
-        let context = coreDataManager.getContext()
 
-        let team = coreDataManager.createObject(from: Club.self)
-        team.name = selectTeam
+        guard let selectPlayer = selectPlayer else {
+            let team = coreDataManager.createObject(from: Club.self)
+            team.name = selectTeam
 
-        let player = coreDataManager.createObject(from: Player.self)
-        player.fullName = fullName.text
-        player.nationality = nationality.text
-        player.age = Int16(age.text ?? "0") ?? 0
-        player.number = Int16(number.text ?? "0") ?? 0
-        player.image = foto.image?.pngData()
-        player.club = team
-        player.position = selectPosition
-        print(selectLocationPlayer.selectedSegmentIndex)
-        player.inPlay = selectLocation(index: selectLocationPlayer.selectedSegmentIndex)
+            let player = coreDataManager.createObject(from: Player.self)
 
-        coreDataManager.save(context: context)
+            setPlayer(player, of: team)
+
+            navigationController?.popViewController(animated: false)
+            return }
+
+        setPlayer(selectPlayer)
         navigationController?.popViewController(animated: true)
     }
 
@@ -105,6 +105,45 @@ private extension PlayerViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
+    func setPlayer(_ player: Player,  of team: Club? = nil) {
+        player.fullName = fullName.text
+        player.nationality = nationality.text
+        player.age = Int16(age.text ?? "0") ?? 0
+        player.number = Int16(number.text ?? "0") ?? 0
+        player.image = foto.image?.pngData()
+        player.position = selectPosition
+        player.inPlay = selectLocation(index: selectLocationPlayer.selectedSegmentIndex)
+
+        guard let team = team else {
+            player.club?.name = selectTeam
+            return }
+        player.club = team
+    }
+
+    func displayPlayer() {
+        enableSearchButton()
+        guard let selectPlayer = selectPlayer else { return }
+        fullName.text = selectPlayer.fullName
+        number.text = String(describing: selectPlayer.number)
+        nationality.text = selectPlayer.nationality
+        age.text =  String(describing: selectPlayer.age)
+        teamButton.setTitle(selectPlayer.club?.name, for: .normal)
+        selectTeam = selectPlayer.club?.name
+        positionButton.setTitle(selectPlayer.position, for: .normal)
+        selectPosition = selectPlayer.position
+        if selectPlayer.inPlay {
+            selectLocationPlayer.selectedSegmentIndex = 0
+        } else {
+            selectLocationPlayer.selectedSegmentIndex = 1
+        }
+
+        guard
+            let playerImage = selectPlayer.image,
+            let image = UIImage(data: playerImage)
+            else { return }
+        foto.image = image
+    }
+
     func setupUI() {
         pickerView.isHidden = true
         saveButton.layer.cornerRadius = 5
@@ -114,7 +153,6 @@ private extension PlayerViewController {
     }
 
     func showImagePickerController() {
-        ActivityIndicator.start()
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true

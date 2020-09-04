@@ -73,6 +73,7 @@ final class CoreDataManager {
                                        selectionNameKeyPath: String? = nil,
                                        predicate: NSCompoundPredicate? = nil) -> NSFetchedResultsController<T> {
         let context = getContext()
+        
         let request: NSFetchRequest<T>
 
         request = entity.fetchRequest() as! NSFetchRequest<T>

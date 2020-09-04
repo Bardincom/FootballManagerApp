@@ -29,8 +29,12 @@ final class MainViewController: UIViewController {
         fetchData()
     }
 
-    @IBAction private func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        coreDataManager.save()
+    }
 
+    @IBAction private func displaySelectedPlayerLocation(_ sender: UISegmentedControl) {
         fetchData(predicate: selectedPredicate)
     }
 }
@@ -76,7 +80,7 @@ private extension MainViewController {
         fetchedObjectsCheck()
     }
 
-    private func fetchedObjectsCheck() {
+    func fetchedObjectsCheck() {
         guard let players = fetchedResultController?.fetchedObjects else { return }
 
         if !players.isEmpty {
@@ -84,6 +88,10 @@ private extension MainViewController {
         } else {
             mainTableView.isHidden = true
         }
+    }
+
+    func showPlayerLocation(_ player: Player) -> String? {
+        return player.inPlay ? Location.inPlay.rawValue : Location.Bench.rawValue
     }
 
     @objc
@@ -128,16 +136,37 @@ extension MainViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, success) in
-            guard let player = self.fetchedResultController?.object(at: indexPath) else { return }
+        guard let player = self.fetchedResultController?.object(at: indexPath) else { return nil}
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
+
             self.coreDataManager.delete(object: player)
         }
 
-        return UISwipeActionsConfiguration(actions: [deleteAction])
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { (_, _, _) in
+            let playerViewController = PlayerViewController()
+            playerViewController.selectPlayer = player
+            self.navigationController?.pushViewController(playerViewController, animated: true)
+        }
+
+        let locationPlayer = UIContextualAction(style: .normal, title: showPlayerLocation(player)) { (_, _, _) in
+
+            player.inPlay ? (player.inPlay = false) : (player.inPlay = true)
+
+            self.coreDataManager.save()
+        }
+
+        editAction.backgroundColor = .orange
+        locationPlayer.backgroundColor = .purple
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction, locationPlayer])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
 }
 
 extension MainViewController: UITableViewDelegate {
+
     //TODO: Logic didSelectRowAt
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mainTableView.deselectRow(at: indexPath, animated: true)
@@ -148,7 +177,6 @@ extension MainViewController: SearchViewControllerDelegate {
     func viewController(_ viewController: SearchViewController, didPassedData predicate: NSCompoundPredicate) {
         fetchData(predicate: predicate)
         selectedPredicate = predicate
-        mainTableView.reloadData()
     }
 }
 
