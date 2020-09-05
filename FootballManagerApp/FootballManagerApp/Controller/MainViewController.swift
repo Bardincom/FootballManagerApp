@@ -201,14 +201,14 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 
-extension MainViewController: SearchViewControllerDelegate {
-    func viewController(_ viewController: SearchViewController, didPassedData predicate: [NSPredicate]) {
-        searchPredicate = predicate
-        fetchData()
-        mainTableView.reloadData()
+//MARK: TableViewDelegate
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        mainTableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
+//MARK: FetchedResultsControllerDelegate
 extension MainViewController: NSFetchedResultsControllerDelegate {
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -272,8 +272,11 @@ extension MainViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
-extension MainViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        mainTableView.deselectRow(at: indexPath, animated: true)
+//MARK: SearchViewControllerDelegate
+extension MainViewController: SearchViewControllerDelegate {
+    func viewController(_ viewController: SearchViewController, didPassedData predicate: [NSPredicate]) {
+        searchPredicate = predicate
+        fetchData()
+        mainTableView.reloadData()
     }
 }
