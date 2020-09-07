@@ -121,7 +121,7 @@ private extension PlayerViewController {
     }
 
     func displayPlayer() {
-        enableSearchButton()
+        enableSaveButton()
         guard let selectPlayer = selectPlayer else { return }
         fullName.text = selectPlayer.fullName
         number.text = String(describing: selectPlayer.number)
@@ -175,7 +175,7 @@ private extension PlayerViewController {
         saveButton.alpha = 0.5
     }
 
-    func enableSearchButton() {
+    func enableSaveButton() {
         saveButton.isEnabled = true
         saveButton.alpha = 1
     }
@@ -289,6 +289,6 @@ extension PlayerViewController: UITextFieldDelegate {
                 disableSaveButton()
                 return }
 
-        enableSearchButton()
+        enableSaveButton()
     }
 }
