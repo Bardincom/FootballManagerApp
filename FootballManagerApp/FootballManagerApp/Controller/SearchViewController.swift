@@ -142,7 +142,7 @@ private extension SearchViewController {
 
         if !age.isEmpty {
             let selectedSegmentControl = ageSearchConditin(index: segmentControl.selectedSegmentIndex)
-            let agePredicate = NSPredicate(format: "\(Predicate.age) \(selectedSegmentControl) '\(age)'")
+            let agePredicate = NSPredicate(format: "\(Predicate.age) \(selectedSegmentControl) \(age)")
             predicate.append(agePredicate)
         }
 

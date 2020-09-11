@@ -74,5 +74,5 @@ enum Predicate {
 }
 
 enum SortDescriptorKey {
-    static let position = "position"
+  static let position = "position"
 }

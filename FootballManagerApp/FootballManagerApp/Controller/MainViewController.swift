@@ -72,27 +72,33 @@ private extension MainViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
-    func fetchData() {
+        func fetchData() {
 
-        let fetchedResult = coreDataManager.fetchData(for: Player.self,
-                                                      selectionNameKeyPath: SortDescriptorKey.position,
-                                                      predicate: selectedCompoundPredicate)
+            guard fetchedResultController == nil else {
+                fetchedResultController?.fetchRequest.predicate = selectedCompoundPredicate
+                try? self.fetchedResultController?.performFetch()
+                fetchedObjectsCheck()
+                return
+            }
 
-        // Фильтрация по локации игрока
-        switch playerLocationSegmentControl.selectedSegmentIndex {
-            case 0:
-                fetchedResultController = fetchedResult
-            case 1:
-                fetchedResultController = fetchedResult
-            case 2:
-                fetchedResultController = fetchedResult
-            default:
-                break
+            let fetchedResult = coreDataManager.fetchData(for: Player.self,
+                                                          selectionNameKeyPath: SortDescriptorKey.position,
+                                                          predicate: selectedCompoundPredicate)
+
+            // Фильтрация по локации игрока
+            switch playerLocationSegmentControl.selectedSegmentIndex {
+                case 0:
+                    fetchedResultController = fetchedResult
+                case 1:
+                    fetchedResultController = fetchedResult
+                case 2:
+                    fetchedResultController = fetchedResult
+                default:
+                    break
+            }
+            fetchedResultController?.delegate = self
+            fetchedObjectsCheck()
         }
-
-        fetchedResultController?.delegate = self
-        fetchedObjectsCheck()
-    }
 
     func makePredicate(location: Bool) -> NSPredicate {
         guard let location = locationConditin(index: playerLocationSegmentControl.selectedSegmentIndex) else {
@@ -188,8 +194,6 @@ extension MainViewController: UITableViewDataSource {
         let locationPlayer = UIContextualAction(style: .normal, title: showPlayerLocation(player)) { (_, _, _) in
 
             player.inPlay ? (player.inPlay = false) : (player.inPlay = true)
-
-            self.coreDataManager.save()
         }
 
         editAction.backgroundColor = .orange

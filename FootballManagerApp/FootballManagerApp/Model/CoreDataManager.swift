@@ -78,9 +78,8 @@ final class CoreDataManager {
 
         request = entity.fetchRequest() as! NSFetchRequest<T>
 
-        let sortDescriptor = NSSortDescriptor(key: SortDescriptorKey.position,
-                                                 ascending: true,
-                                                 selector: #selector(NSString.localizedStandardCompare(_:)))
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(Player.position),
+                                              ascending: true)
 
         request.predicate = predicate
         request.sortDescriptors = [sortDescriptor]
