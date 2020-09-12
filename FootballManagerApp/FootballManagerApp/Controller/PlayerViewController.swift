@@ -10,11 +10,6 @@ import UIKit
 
 final class PlayerViewController: UIViewController {
 
-    private enum CountItem {
-        static let team = Picker.teams.count
-        static let position = Picker.positions.count
-    }
-
     @IBOutlet private var teamButton: UIButton!
     @IBOutlet private var positionButton: UIButton!
     @IBOutlet private var uploadImageButton: UIButton!
@@ -26,19 +21,22 @@ final class PlayerViewController: UIViewController {
     @IBOutlet private var foto: UIImageView!
     @IBOutlet private var pickerView: UIPickerView!
     @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet private var selectLocationPlayer: UISegmentedControl!
 
     lazy var coreDataManager = CoreDataManager.shared
     private var isTeamSelect: Bool = true
     private var selectTeam: String?
     private var selectPosition: String?
     private var chosenImage = #imageLiteral(resourceName: "defaultImage")
+    var selectPlayer: Player?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupUI()
         setTextFieldDelegate()
-        disableSearchButton()
+        disableSaveButton()
+        displayPlayer()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -46,50 +44,49 @@ final class PlayerViewController: UIViewController {
         notificationAddObserver(#selector(keyboardWillShow(notification:)))
     }
 
-    @IBAction func uploadImage(_ sender: UIButton) {
+    @IBAction private func uploadImage(_ sender: UIButton) {
+        ActivityIndicator.start()
         showImagePickerController()
+
+
     }
 
-    @IBAction func pressToSelectTeam(_ sender: UIButton) {
+    @IBAction private func pressToSelectTeam(_ sender: UIButton) {
         isTeamSelect = true
         pickerView.isHidden = false
         showPickerView()
     }
 
-    @IBAction func pressToSelectPosition(_ sender: UIButton) {
+    @IBAction private func pressToSelectPosition(_ sender: UIButton) {
         isTeamSelect = false
         pickerView.isHidden = false
         showPickerView()
     }
 
-    @IBAction func savePlayer(_ sender: UIButton) {
+    @IBAction private func savePlayer(_ sender: UIButton) {
         guard selectTeam != nil else {
             Alert.showAlert(self) {
                 self.pressToSelectTeam(self.teamButton)
             }
             return
         }
-        
-        let context = coreDataManager.getContext()
 
-        let team = coreDataManager.createObject(from: Club.self)
-        team.name = selectTeam
+        guard let selectPlayer = selectPlayer else {
+            let team = coreDataManager.createObject(from: Club.self)
+            team.name = selectTeam
 
-        let player = coreDataManager.createObject(from: Player.self)
-        player.fullName = fullName.text
-        player.nationality = nationality.text
-        player.age = Int16(age.text ?? "0") ?? 0
-        player.number = Int16(number.text ?? "0") ?? 0
-        player.image = foto.image?.pngData()
-        player.club = team
-        player.position = selectPosition
+            let player = coreDataManager.createObject(from: Player.self)
 
-        coreDataManager.save(context: context)
+            setPlayer(player, of: team)
+
+            navigationController?.popViewController(animated: false)
+            return }
+
+        setPlayer(selectPlayer)
         navigationController?.popViewController(animated: true)
     }
 
-
-    @IBAction func hideKeyboard(_ sender: UITapGestureRecognizer) {
+    @IBAction private func hideKeyboard(_ sender: UITapGestureRecognizer) {
         number.resignFirstResponder()
         fullName.resignFirstResponder()
         nationality.resignFirstResponder()
@@ -108,6 +105,45 @@ private extension PlayerViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
+    func setPlayer(_ player: Player,  of team: Club? = nil) {
+        player.fullName = fullName.text
+        player.nationality = nationality.text
+        player.age = Int16(age.text ?? "0") ?? 0
+        player.number = Int16(number.text ?? "0") ?? 0
+        player.image = foto.image?.pngData()
+        player.position = selectPosition
+        player.inPlay = selectLocation(index: selectLocationPlayer.selectedSegmentIndex)
+
+        guard let team = team else {
+            player.club?.name = selectTeam
+            return }
+        player.club = team
+    }
+
+    func displayPlayer() {
+        enableSaveButton()
+        guard let selectPlayer = selectPlayer else { return }
+        fullName.text = selectPlayer.fullName
+        number.text = String(describing: selectPlayer.number)
+        nationality.text = selectPlayer.nationality
+        age.text =  String(describing: selectPlayer.age)
+        teamButton.setTitle(selectPlayer.club?.name, for: .normal)
+        selectTeam = selectPlayer.club?.name
+        positionButton.setTitle(selectPlayer.position, for: .normal)
+        selectPosition = selectPlayer.position
+        if selectPlayer.inPlay {
+            selectLocationPlayer.selectedSegmentIndex = 0
+        } else {
+            selectLocationPlayer.selectedSegmentIndex = 1
+        }
+
+        guard
+            let playerImage = selectPlayer.image,
+            let image = UIImage(data: playerImage)
+            else { return }
+        foto.image = image
+    }
+
     func setupUI() {
         pickerView.isHidden = true
         saveButton.layer.cornerRadius = 5
@@ -117,7 +153,6 @@ private extension PlayerViewController {
     }
 
     func showImagePickerController() {
-        ActivityIndicator.start()
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
@@ -135,14 +170,25 @@ private extension PlayerViewController {
         age.delegate = self
     }
 
-    func disableSearchButton() {
+    func disableSaveButton() {
         saveButton.isEnabled = false
         saveButton.alpha = 0.5
     }
 
-    func enableSearchButton() {
+    func enableSaveButton() {
         saveButton.isEnabled = true
         saveButton.alpha = 1
+    }
+
+    func selectLocation(index: Int) -> Bool {
+        var isPlay: Bool = true
+
+        switch index {
+            case 0: isPlay = true
+            case 1: isPlay = false
+            default: break
+        }
+        return isPlay
     }
 
     @objc
@@ -173,6 +219,7 @@ extension PlayerViewController: UIImagePickerControllerDelegate, UINavigationCon
 //MARK: UIPickerViewDataSource
 extension PlayerViewController: UIPickerViewDataSource {
     func showPickerView() {
+        pickerView.setDefaultValue()
         pickerView.backgroundColor = Color.lightGray
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -239,9 +286,9 @@ extension PlayerViewController: UITextFieldDelegate {
             let fullName = fullName.text, !fullName.isEmpty,
             let nationality = nationality.text, !nationality.isEmpty
             else {
-                disableSearchButton()
+                disableSaveButton()
                 return }
 
-        enableSearchButton()
+        enableSaveButton()
     }
 }

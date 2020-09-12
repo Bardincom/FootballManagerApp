@@ -18,7 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         _ = CoreDataManager.shared
 
         assembly(windowScene)
-
     }
 }
 
@@ -27,7 +26,7 @@ private extension SceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         let rootViewController = MainViewController()
-        rootViewController.title = "Names.documents"
+        rootViewController.title = Title.teamManager
         
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
