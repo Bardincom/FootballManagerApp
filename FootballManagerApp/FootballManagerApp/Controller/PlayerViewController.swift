@@ -45,9 +45,10 @@ final class PlayerViewController: UIViewController {
     }
 
     @IBAction private func uploadImage(_ sender: UIButton) {
-        ActivityIndicator.start()
-        showImagePickerController()
-
+        DispatchQueue.main.async {
+                    ActivityIndicator.start()
+            self.showImagePickerController()
+        }
 
     }
 
