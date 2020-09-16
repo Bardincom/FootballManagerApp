@@ -23,3 +23,5 @@ MVC
 5. При открытии клавиатуры происходит смещение интерфейса.
 6. Закреплены на практике знания в работе с **CoreData**.
 7. Группировка и фильтрация объектов с использованием **NSFetchedResultsControllerDelegate** и **NSCompoundPredicate**.
+
+![GitHubApplication](https://github.com/Bardincom/FootballManagerApp/blob/FootballManagerExample.gif)
